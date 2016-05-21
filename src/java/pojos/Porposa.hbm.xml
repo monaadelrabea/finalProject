@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 19, 2016 3:27:38 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated May 21, 2016 12:50:39 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Porposa" table="porposa" catalog="itiProject" optimistic-lock="version">
+    <class name="pojos.Porposa" table="porposa" catalog="itiproject" optimistic-lock="version">
         <id name="porpId" type="java.lang.Integer">
             <column name="porpId" />
             <generator class="identity" />
@@ -17,8 +17,8 @@
         <property name="price" type="int">
             <column name="price" not-null="true" />
         </property>
-        <property name="startDate" type="date">
-            <column name="startDate" length="10" not-null="true" />
+        <property name="startDatePor" type="date">
+            <column name="startDatePor" length="10" not-null="true" />
         </property>
         <property name="deadLinePor" type="date">
             <column name="deadLinePor" length="10" not-null="true" />

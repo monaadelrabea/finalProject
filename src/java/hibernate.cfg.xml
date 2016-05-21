@@ -4,22 +4,22 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/itiProject?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/itiproject?useUnicode=true&amp;characterEncoding=UTF-8</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
-    <mapping resource="pojos/Porposa.hbm.xml"/>
-    <mapping resource="pojos/Tagstable.hbm.xml"/>
-    <mapping resource="pojos/Projectsimages.hbm.xml"/>
-    <mapping resource="pojos/Replying.hbm.xml"/>
-    <mapping resource="pojos/Skilltable.hbm.xml"/>
-    <mapping resource="pojos/Categorytable.hbm.xml"/>
-    <mapping resource="pojos/Details.hbm.xml"/>
+    <mapping resource="pojos/Comments.hbm.xml"/>
+    <mapping resource="pojos/Users.hbm.xml"/>
     <mapping resource="pojos/Portofolioforuser.hbm.xml"/>
+    <mapping resource="pojos/Skilltable.hbm.xml"/>
+    <mapping resource="pojos/Projectsimages.hbm.xml"/>
     <mapping resource="pojos/Portofolioiamges.hbm.xml"/>
     <mapping resource="pojos/Phoneofuser.hbm.xml"/>
     <mapping resource="pojos/Projectsforusers.hbm.xml"/>
-    <mapping resource="pojos/Postforprojects.hbm.xml"/>
-    <mapping resource="pojos/Users.hbm.xml"/>
     <mapping resource="pojos/Tagsofprojects.hbm.xml"/>
+    <mapping resource="pojos/Categorytable.hbm.xml"/>
+    <mapping resource="pojos/Tagstable.hbm.xml"/>
+    <mapping resource="pojos/Postforprojects.hbm.xml"/>
+    <mapping resource="pojos/Details.hbm.xml"/>
+    <mapping resource="pojos/Porposa.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

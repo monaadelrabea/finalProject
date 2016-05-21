@@ -5,7 +5,7 @@
  */
 package cruds;
 
-import pojos.Replying;
+import pojos.Comments;
 
 /**
  *
@@ -13,11 +13,11 @@ import pojos.Replying;
  */
 public interface ReplyingCrudInt {
 
-    public void insert(Replying replying);
+    public void insert(Comments replying);
 
-    public Replying select(Integer id);
+    public Comments select(Integer id);
 
-    public void update(Integer id, Replying replying);
+    public void update(Integer id, Comments replying);
 
     public void delete(Integer id);
 

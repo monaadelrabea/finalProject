@@ -8,6 +8,7 @@ package cruds;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import pojos.Porposa;
+import seesioncreator.SessionCreation;
 
 /**
  *
@@ -18,7 +19,7 @@ public class PorposaCrud implements PorposaCrudInt {
     @Override
     public void insert(Porposa porposa) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc =SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();
@@ -36,7 +37,7 @@ public class PorposaCrud implements PorposaCrudInt {
     @Override
     public Porposa select(Integer id) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
         Porposa porposa = new Porposa();
 
         try {
@@ -56,7 +57,7 @@ public class PorposaCrud implements PorposaCrudInt {
     @Override
     public void update(Integer id, Porposa porposa) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();
@@ -75,7 +76,7 @@ public class PorposaCrud implements PorposaCrudInt {
     @Override
     public void delete(Integer id) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();

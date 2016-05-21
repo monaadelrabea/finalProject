@@ -8,6 +8,7 @@ package cruds;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import pojos.Skilltable;
+import seesioncreator.SessionCreation;
 
 /**
  *
@@ -18,7 +19,7 @@ public class SkilltableCrud implements SkilltableCrudInt {
     @Override
     public void insert(Skilltable s) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();
@@ -36,7 +37,7 @@ public class SkilltableCrud implements SkilltableCrudInt {
     @Override
     public Skilltable select(Integer id) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
         Skilltable skilltable = new Skilltable();
 
         try {
@@ -56,7 +57,7 @@ public class SkilltableCrud implements SkilltableCrudInt {
     @Override
     public void update(Integer id, Skilltable s) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();
@@ -75,7 +76,7 @@ public class SkilltableCrud implements SkilltableCrudInt {
     @Override
     public void delete(Integer id) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();

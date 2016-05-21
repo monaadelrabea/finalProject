@@ -5,7 +5,7 @@
  */
 package businesslayer.businesslogic;
 
-import pojos.Replying;
+import pojos.Comments;
 
 /**
  *
@@ -13,11 +13,11 @@ import pojos.Replying;
  */
 public interface ReplyingDelegationInt {
 
-    public void delegateInsert(Replying replying);
+    public void delegateInsert(Comments replying);
 
-    public Replying delegateSelect(Integer id);
+    public Comments delegateSelect(Integer id);
 
-    public void delegateUpdate(Integer id, Replying replying);
+    public void delegateUpdate(Integer id, Comments replying);
 
     public void delegateDelete(Integer id);
 

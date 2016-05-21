@@ -9,6 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import pojos.Portofolioiamges;
 import pojos.Users;
+import seesioncreator.SessionCreation;
 
 /**
  *
@@ -19,7 +20,7 @@ public class PortofolioiamgesCrud implements PortofolioiamgesCrudInt {
     @Override
     public void insert(Portofolioiamges p) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();
@@ -37,7 +38,7 @@ public class PortofolioiamgesCrud implements PortofolioiamgesCrudInt {
     @Override
     public Portofolioiamges select(Integer id) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
         Portofolioiamges portofolioiamges = new Portofolioiamges();
 
         try {
@@ -57,7 +58,7 @@ public class PortofolioiamgesCrud implements PortofolioiamgesCrudInt {
     @Override
     public void update(Integer id, Portofolioiamges p) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();
@@ -76,7 +77,7 @@ public class PortofolioiamgesCrud implements PortofolioiamgesCrudInt {
     @Override
     public void delete(Integer id) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();

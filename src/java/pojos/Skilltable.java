@@ -1,5 +1,5 @@
 package pojos;
-// Generated May 19, 2016 3:27:38 PM by Hibernate Tools 4.3.1
+// Generated May 21, 2016 12:50:38 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,7 +14,7 @@ public class Skilltable  implements java.io.Serializable {
      private Integer skillId;
      private String skillName;
      private Set userses = new HashSet(0);
-     private Set postforprojectses = new HashSet(0);
+     private Set projectsforuserses = new HashSet(0);
 
     public Skilltable() {
     }
@@ -23,10 +23,10 @@ public class Skilltable  implements java.io.Serializable {
     public Skilltable(String skillName) {
         this.skillName = skillName;
     }
-    public Skilltable(String skillName, Set userses, Set postforprojectses) {
+    public Skilltable(String skillName, Set userses, Set projectsforuserses) {
        this.skillName = skillName;
        this.userses = userses;
-       this.postforprojectses = postforprojectses;
+       this.projectsforuserses = projectsforuserses;
     }
    
     public Integer getSkillId() {
@@ -50,12 +50,12 @@ public class Skilltable  implements java.io.Serializable {
     public void setUserses(Set userses) {
         this.userses = userses;
     }
-    public Set getPostforprojectses() {
-        return this.postforprojectses;
+    public Set getProjectsforuserses() {
+        return this.projectsforuserses;
     }
     
-    public void setPostforprojectses(Set postforprojectses) {
-        this.postforprojectses = postforprojectses;
+    public void setProjectsforuserses(Set projectsforuserses) {
+        this.projectsforuserses = projectsforuserses;
     }
 
 

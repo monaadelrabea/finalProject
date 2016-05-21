@@ -8,6 +8,7 @@ package cruds;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import pojos.Portofolioforuser;
+import seesioncreator.SessionCreation;
 
 /**
  *
@@ -18,7 +19,7 @@ public class PortofolioforuserCrud implements PortofolioforuserCrudInt {
     @Override
     public void insert(Portofolioforuser portofolioforuser) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();
@@ -36,7 +37,7 @@ public class PortofolioforuserCrud implements PortofolioforuserCrudInt {
     @Override
     public Portofolioforuser select(Integer id) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
         Portofolioforuser portofolioforuser = new Portofolioforuser();
 
         try {
@@ -56,7 +57,7 @@ public class PortofolioforuserCrud implements PortofolioforuserCrudInt {
     @Override
     public void update(Integer id, Portofolioforuser portofolioforuser) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();
@@ -75,7 +76,7 @@ public class PortofolioforuserCrud implements PortofolioforuserCrudInt {
     @Override
     public void delete(Integer id) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 19, 2016 3:27:38 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated May 21, 2016 12:50:39 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Portofolioiamges" table="portofolioiamges" catalog="itiProject" optimistic-lock="version">
+    <class name="pojos.Portofolioiamges" table="portofolioiamges" catalog="itiproject" optimistic-lock="version">
         <id name="imageId" type="java.lang.Integer">
             <column name="imageId" />
             <generator class="identity" />

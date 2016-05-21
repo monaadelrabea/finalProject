@@ -8,6 +8,7 @@ package cruds;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import pojos.Phoneofuser;
+import seesioncreator.SessionCreation;
 
 /**
  *
@@ -18,7 +19,7 @@ public class PhoneofuserCrud implements PhoneofuserCrudInt {
     @Override
     public void insert(Phoneofuser pc) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();
@@ -36,7 +37,7 @@ public class PhoneofuserCrud implements PhoneofuserCrudInt {
     @Override
     public Phoneofuser select(Integer id) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
         Phoneofuser phoneofuser = new Phoneofuser();
 
         try {
@@ -56,7 +57,7 @@ public class PhoneofuserCrud implements PhoneofuserCrudInt {
     @Override
     public void update(Integer id, Phoneofuser pc) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();
@@ -75,7 +76,7 @@ public class PhoneofuserCrud implements PhoneofuserCrudInt {
     @Override
     public void delete(Integer id) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();

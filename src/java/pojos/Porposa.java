@@ -1,5 +1,5 @@
 package pojos;
-// Generated May 19, 2016 3:27:38 PM by Hibernate Tools 4.3.1
+// Generated May 21, 2016 12:50:38 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -16,7 +16,7 @@ public class Porposa  implements java.io.Serializable {
      private Projectsforusers projectsforusers;
      private Users users;
      private int price;
-     private Date startDate;
+     private Date startDatePor;
      private Date deadLinePor;
      private String statusOfPorposa;
      private Set detailses = new HashSet(0);
@@ -25,19 +25,19 @@ public class Porposa  implements java.io.Serializable {
     }
 
 	
-    public Porposa(Projectsforusers projectsforusers, Users users, int price, Date startDate, Date deadLinePor, String statusOfPorposa) {
+    public Porposa(Projectsforusers projectsforusers, Users users, int price, Date startDatePor, Date deadLinePor, String statusOfPorposa) {
         this.projectsforusers = projectsforusers;
         this.users = users;
         this.price = price;
-        this.startDate = startDate;
+        this.startDatePor = startDatePor;
         this.deadLinePor = deadLinePor;
         this.statusOfPorposa = statusOfPorposa;
     }
-    public Porposa(Projectsforusers projectsforusers, Users users, int price, Date startDate, Date deadLinePor, String statusOfPorposa, Set detailses) {
+    public Porposa(Projectsforusers projectsforusers, Users users, int price, Date startDatePor, Date deadLinePor, String statusOfPorposa, Set detailses) {
        this.projectsforusers = projectsforusers;
        this.users = users;
        this.price = price;
-       this.startDate = startDate;
+       this.startDatePor = startDatePor;
        this.deadLinePor = deadLinePor;
        this.statusOfPorposa = statusOfPorposa;
        this.detailses = detailses;
@@ -71,12 +71,12 @@ public class Porposa  implements java.io.Serializable {
     public void setPrice(int price) {
         this.price = price;
     }
-    public Date getStartDate() {
-        return this.startDate;
+    public Date getStartDatePor() {
+        return this.startDatePor;
     }
     
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStartDatePor(Date startDatePor) {
+        this.startDatePor = startDatePor;
     }
     public Date getDeadLinePor() {
         return this.deadLinePor;

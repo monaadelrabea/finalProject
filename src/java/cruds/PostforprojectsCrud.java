@@ -8,6 +8,7 @@ package cruds;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import pojos.Postforprojects;
+import seesioncreator.SessionCreation;
 
 /**
  *
@@ -18,7 +19,7 @@ public class PostforprojectsCrud implements PostforprojectsCrudInt {
     @Override
     public void insert(Postforprojects postforprojects) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();
@@ -36,7 +37,7 @@ public class PostforprojectsCrud implements PostforprojectsCrudInt {
     @Override
     public Postforprojects select(Integer id) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
         Postforprojects postforprojects = new Postforprojects();
 
         try {
@@ -56,7 +57,7 @@ public class PostforprojectsCrud implements PostforprojectsCrudInt {
     @Override
     public void update(Integer id, Postforprojects postforprojects) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();
@@ -75,7 +76,7 @@ public class PostforprojectsCrud implements PostforprojectsCrudInt {
     @Override
     public void delete(Integer id) {
 
-        Session sc = sessioncreator.SessionCreation.getSessionFactory().openSession();
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();

@@ -1,5 +1,5 @@
 package pojos;
-// Generated May 19, 2016 3:27:38 PM by Hibernate Tools 4.3.1
+// Generated May 21, 2016 12:50:38 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -15,8 +15,7 @@ public class Postforprojects  implements java.io.Serializable {
      private Projectsforusers projectsforusers;
      private Users users;
      private String post;
-     private Set skilltables = new HashSet(0);
-     private Set replyings = new HashSet(0);
+     private Set commentses = new HashSet(0);
 
     public Postforprojects() {
     }
@@ -27,12 +26,11 @@ public class Postforprojects  implements java.io.Serializable {
         this.users = users;
         this.post = post;
     }
-    public Postforprojects(Projectsforusers projectsforusers, Users users, String post, Set skilltables, Set replyings) {
+    public Postforprojects(Projectsforusers projectsforusers, Users users, String post, Set commentses) {
        this.projectsforusers = projectsforusers;
        this.users = users;
        this.post = post;
-       this.skilltables = skilltables;
-       this.replyings = replyings;
+       this.commentses = commentses;
     }
    
     public Integer getQid() {
@@ -63,19 +61,12 @@ public class Postforprojects  implements java.io.Serializable {
     public void setPost(String post) {
         this.post = post;
     }
-    public Set getSkilltables() {
-        return this.skilltables;
+    public Set getCommentses() {
+        return this.commentses;
     }
     
-    public void setSkilltables(Set skilltables) {
-        this.skilltables = skilltables;
-    }
-    public Set getReplyings() {
-        return this.replyings;
-    }
-    
-    public void setReplyings(Set replyings) {
-        this.replyings = replyings;
+    public void setCommentses(Set commentses) {
+        this.commentses = commentses;
     }
 
 

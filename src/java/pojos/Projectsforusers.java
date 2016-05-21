@@ -1,5 +1,5 @@
 package pojos;
-// Generated May 19, 2016 3:27:38 PM by Hibernate Tools 4.3.1
+// Generated May 21, 2016 12:50:38 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -23,6 +23,7 @@ public class Projectsforusers  implements java.io.Serializable {
      private Set porposas = new HashSet(0);
      private Set projectsimageses = new HashSet(0);
      private Set postforprojectses = new HashSet(0);
+     private Set skilltables = new HashSet(0);
      private Set detailses = new HashSet(0);
      private Set tagsofprojectses = new HashSet(0);
 
@@ -38,7 +39,7 @@ public class Projectsforusers  implements java.io.Serializable {
         this.budget = budget;
         this.startDate = startDate;
     }
-    public Projectsforusers(Categorytable categorytable, Users users, String projectName, String projectDescription, int budget, Date startDate, Date projectDeadLine, Set porposas, Set projectsimageses, Set postforprojectses, Set detailses, Set tagsofprojectses) {
+    public Projectsforusers(Categorytable categorytable, Users users, String projectName, String projectDescription, int budget, Date startDate, Date projectDeadLine, Set porposas, Set projectsimageses, Set postforprojectses, Set skilltables, Set detailses, Set tagsofprojectses) {
        this.categorytable = categorytable;
        this.users = users;
        this.projectName = projectName;
@@ -49,6 +50,7 @@ public class Projectsforusers  implements java.io.Serializable {
        this.porposas = porposas;
        this.projectsimageses = projectsimageses;
        this.postforprojectses = postforprojectses;
+       this.skilltables = skilltables;
        this.detailses = detailses;
        this.tagsofprojectses = tagsofprojectses;
     }
@@ -129,6 +131,13 @@ public class Projectsforusers  implements java.io.Serializable {
     
     public void setPostforprojectses(Set postforprojectses) {
         this.postforprojectses = postforprojectses;
+    }
+    public Set getSkilltables() {
+        return this.skilltables;
+    }
+    
+    public void setSkilltables(Set skilltables) {
+        this.skilltables = skilltables;
     }
     public Set getDetailses() {
         return this.detailses;
