@@ -1,5 +1,5 @@
 package pojos;
-// Generated May 21, 2016 12:50:38 PM by Hibernate Tools 4.3.1
+// Generated May 21, 2016 2:50:29 PM by Hibernate Tools 4.3.1
 
 
 
@@ -36,23 +36,6 @@ public class DetailsId  implements java.io.Serializable {
     }
 
 
-   public boolean equals(Object other) {
-         if ( (this == other ) ) return true;
-		 if ( (other == null ) ) return false;
-		 if ( !(other instanceof DetailsId) ) return false;
-		 DetailsId castOther = ( DetailsId ) other; 
-         
-		 return (this.getPorposerIdForDetails()==castOther.getPorposerIdForDetails())
- && (this.getProjectIdForDetails()==castOther.getProjectIdForDetails());
-   }
-   
-   public int hashCode() {
-         int result = 17;
-         
-         result = 37 * result + this.getPorposerIdForDetails();
-         result = 37 * result + this.getProjectIdForDetails();
-         return result;
-   }   
 
 
 }

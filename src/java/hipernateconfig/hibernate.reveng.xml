@@ -18,4 +18,5 @@
   <table-filter match-name="categorytable"/>
   <table-filter match-name="projectsforusers"/>
   <table-filter match-name="phoneofuser"/>
+  <table-filter match-name="admin"/>
 </hibernate-reverse-engineering>

@@ -21,5 +21,6 @@
     <mapping resource="pojos/Postforprojects.hbm.xml"/>
     <mapping resource="pojos/Details.hbm.xml"/>
     <mapping resource="pojos/Porposa.hbm.xml"/>
+    <mapping resource="pojos/Admin.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
