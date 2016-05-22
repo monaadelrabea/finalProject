@@ -91,16 +91,14 @@ public class Authentication {
         List<Integer>  ss=r.returnSkills(sk);
         List<Skilltable> st=r.returnSkillsAll(ss);
         Set sss =new HashSet(st);
-        s.setSkilltables(sss);
-         s.getSkilltables().add(skl);
-          s.getSkilltables().add(skl1);
-//        sss.add(s);
-//        for(int i=0;i<st.size();i++){
-//              s.getSkilltables().add(st.get(i));
-//              System.out.println(st.get(i).getSkillId());
-//        }
+     
+        for(int i=0;i<st.size();i++){
+             s.getSkilltables().add(st.get(i));
+             d.delegateInsert(s);    
+             System.out.println(st.get(i).getSkillId());
+       }
         System.out.println(s.getSkilltables());
-         d.delegateInsert(s);
+        
         ////////////////////////////////////////////////////////////////////////
         
          for(int i=0;i<ph3.size();i++){

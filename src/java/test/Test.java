@@ -43,7 +43,7 @@ public class Test {
         InsertingClass.insertSkill(skl);
         Skilltable skl1=new Skilltable();
         skl1.setSkillName("انتريهات");
-        InsertingClass.insertSkill(skl1);
+       
 /////////////////////////////////////////////////////////////////
        
         Users u= new Users("monaadelrabea@gmail.com","monaImage","mamaandbaba",true,"monyAdel",1000,"مصر","الغربية","كفر الزيات","java devolper","mona");
@@ -51,6 +51,9 @@ public class Test {
         u.getSkilltables().add(skl1);
         UsersDelegation in=new UsersDelegation();
         in.delegateInsert(u);
+        skl1.getUserses().add(u);
+       InsertingClass.insertSkill(skl1);
+    
         /////////////////////////////////////////////////
         Tagstable tag =new Tagstable();
         tag.setTagDescription("الوان بني");
