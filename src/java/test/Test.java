@@ -32,9 +32,7 @@ public class Test {
     public static void main(String[] args) {
 
          
-Users u= new Users("monaadelrabea@gmail.com","monaImage","mamaandbaba",true,"monyAdel",1000,"مصر","الغربية","كفر الزيات","java devolper","mona");
-        UsersDelegation in=new UsersDelegation();
-        in.delegateInsert(u);
+
         Categorytable cat =new Categorytable();
         cat.setCategoryName("الاثاث");
         cat.setImageOfCategoryUrl("mmmm");
@@ -47,6 +45,13 @@ Users u= new Users("monaadelrabea@gmail.com","monaImage","mamaandbaba",true,"mon
         skl1.setSkillName("انتريهات");
         InsertingClass.insertSkill(skl1);
 /////////////////////////////////////////////////////////////////
+       
+        Users u= new Users("monaadelrabea@gmail.com","monaImage","mamaandbaba",true,"monyAdel",1000,"مصر","الغربية","كفر الزيات","java devolper","mona");
+        u.getSkilltables().add(skl);
+        u.getSkilltables().add(skl1);
+        UsersDelegation in=new UsersDelegation();
+        in.delegateInsert(u);
+        /////////////////////////////////////////////////
         Tagstable tag =new Tagstable();
         tag.setTagDescription("الوان بني");
         tag.setCategorytable(cat);

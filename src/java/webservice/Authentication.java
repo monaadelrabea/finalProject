@@ -40,10 +40,10 @@ public class Authentication {
     public Response register(MultivaluedMap<String,String> val) throws Exception {
         
          Skilltable skl=new Skilltable();
-        skl.setSkillName("انتريهات");
+        skl.setSkillName("انتريهاتfslndlsug");
         InsertingClass.insertSkill(skl);
         Skilltable skl1=new Skilltable();
-        skl1.setSkillName("انتريهات");
+        skl1.setSkillName("انتريهاتnvxhyu");
         InsertingClass.insertSkill(skl1);
         ReturnList r=new ReturnList();
         UsersDelegation d=new UsersDelegation();
