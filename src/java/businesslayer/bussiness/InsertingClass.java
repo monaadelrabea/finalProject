@@ -12,7 +12,7 @@ import cruds.ProjectCrudImplementation;
 import cruds.SkillCrudImplementation;
 import cruds.TagCrudImplementation;
 import cruds.TagsForProjectsImplementation;
-import cruds.UserCrud;
+import cruds.UsersCrud;
 import crudsinterface.CategoryCrudInterface;
 import crudsinterface.DetailsCrudInterface;
 import crudsinterface.ImagesCrudInterface;
@@ -40,10 +40,10 @@ import seesioncreator.SessionCreation;
  * @author m@pc
  */
 public class InsertingClass {
- public   static void insertUser(Users u){
-   UserCrud  uc= new UserCrud(); 
+ /*public   static void insertUser(Users u){
+   UsersCrud  uc= new UsersCrud(); 
    uc.InsertUser(u);
- }  
+ } */ 
  public   static void insertProject(Projectsforusers p){
      ProjectCrudInterface  uc ;
      uc = new ProjectCrudImplementation();

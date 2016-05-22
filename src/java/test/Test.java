@@ -32,8 +32,9 @@ public class Test {
     public static void main(String[] args) {
 
          
-        Users u= new Users("monaadelrabea@gmail.com","monaImage","mamaandbaba",true,"monyAdel",1000,"مصر","الغربية","كفر الزيات","java devolper","mona");
-        InsertingClass.insertUser(u);
+Users u= new Users("monaadelrabea@gmail.com","monaImage","mamaandbaba",true,"monyAdel",1000,"مصر","الغربية","كفر الزيات","java devolper","mona");
+        UsersDelegation in=new UsersDelegation();
+        in.delegateInsert(u);
         Categorytable cat =new Categorytable();
         cat.setCategoryName("الاثاث");
         cat.setImageOfCategoryUrl("mmmm");
@@ -41,10 +42,10 @@ public class Test {
  ///////////////////////////////////////////////////////////////
         Skilltable skl=new Skilltable();
         skl.setSkillName("انتريهات");
-          InsertingClass.insertSkill(skl);
-            Skilltable skl1=new Skilltable();
+        InsertingClass.insertSkill(skl);
+        Skilltable skl1=new Skilltable();
         skl1.setSkillName("انتريهات");
-          InsertingClass.insertSkill(skl1);
+        InsertingClass.insertSkill(skl1);
 /////////////////////////////////////////////////////////////////
         Tagstable tag =new Tagstable();
         tag.setTagDescription("الوان بني");

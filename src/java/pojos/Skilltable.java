@@ -54,6 +54,7 @@ public class Skilltable  implements java.io.Serializable {
         return this.projectsforuserses;
     }
     
+    
     public void setProjectsforuserses(Set projectsforuserses) {
         this.projectsforuserses = projectsforuserses;
     }

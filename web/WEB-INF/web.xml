@@ -13,6 +13,7 @@
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
             <param-value>webservice</param-value>
+            
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
