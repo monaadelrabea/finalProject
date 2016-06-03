@@ -5,9 +5,10 @@
  */
 package businesslayer.businesslogic;
 
-import cruds.CrudInterface;
-import cruds.PhoneofuserCrud;
-import cruds.PhoneofuserCrudInt;
+import businesslayer.businesslogicinterface.PhoneofuserDelegationInt;
+import crudsinterface.CrudInterface;
+import cruds.PhoneofuserCrudImplementation;
+import crudsinterface.PhoneofuserCrudInterface;
 import pojos.Phoneofuser;
 
 /**
@@ -19,7 +20,7 @@ public class PhoneofuserDelegation implements PhoneofuserDelegationInt {
     @Override
     public void delegateInsert(Phoneofuser p) {
 
-        PhoneofuserCrudInt crud = new PhoneofuserCrud();
+        PhoneofuserCrudInterface crud = new PhoneofuserCrudImplementation();
         crud.insert(p);
 
     }
@@ -27,7 +28,7 @@ public class PhoneofuserDelegation implements PhoneofuserDelegationInt {
     @Override
     public Phoneofuser delegateSelect(Integer id) {
 
-        PhoneofuserCrudInt crud = new PhoneofuserCrud();
+        PhoneofuserCrudInterface crud = new PhoneofuserCrudImplementation();
         return (Phoneofuser) crud.select(id);
 
     }
@@ -35,7 +36,7 @@ public class PhoneofuserDelegation implements PhoneofuserDelegationInt {
     @Override
     public void delegateUpdate(Integer id, Phoneofuser p) {
 
-        PhoneofuserCrudInt crud = new PhoneofuserCrud();
+        PhoneofuserCrudInterface crud = new PhoneofuserCrudImplementation();
         crud.update(id, p);
 
     }
@@ -43,7 +44,7 @@ public class PhoneofuserDelegation implements PhoneofuserDelegationInt {
     @Override
     public void delegateDelete(Integer id) {
 
-        PhoneofuserCrudInt crud = new PhoneofuserCrud();
+        PhoneofuserCrudInterface crud = new PhoneofuserCrudImplementation();
         crud.delete(id);
 
     }

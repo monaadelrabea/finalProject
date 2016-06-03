@@ -6,16 +6,16 @@
 package crudsinterface;
 
 import java.util.ArrayList;
-import pojos.Categorytable;
+import pojos.Category;
 
 /**
  *
  * @author m@pc
  */
 public interface CategoryCrudInterface {
-   public ArrayList<Categorytable> selectCategorys();
-   public Categorytable selectCategory(int id);
-   public void insertCategoty(Categorytable c);
-   public void updateCategory(Categorytable c);
-   public void deleteCategory(int id);
+   public ArrayList<Category> selectCategorys();
+   public Category selectCategory(int id);
+   public boolean insertCategoty(Category c);
+   public boolean updateCategory(Category c);
+   public boolean deleteCategory(int id);
 }

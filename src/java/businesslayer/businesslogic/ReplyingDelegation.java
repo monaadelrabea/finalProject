@@ -5,8 +5,9 @@
  */
 package businesslayer.businesslogic;
 
-import cruds.ReplyingCrud;
-import cruds.ReplyingCrudInt;
+import businesslayer.businesslogicinterface.ReplyingDelegationInt;
+import cruds.ReplyingCrudImplementation;
+import crudsinterface.ReplyingCrudInterface;
 import pojos.Comments;
 
 /**
@@ -18,7 +19,7 @@ public class ReplyingDelegation implements ReplyingDelegationInt {
     @Override
     public void delegateInsert(Comments replying) {
 
-        ReplyingCrudInt crud = new ReplyingCrud();
+        ReplyingCrudInterface crud = new ReplyingCrudImplementation();
         crud.insert(replying);
 
     }
@@ -26,7 +27,7 @@ public class ReplyingDelegation implements ReplyingDelegationInt {
     @Override
     public Comments delegateSelect(Integer id) {
 
-        ReplyingCrudInt crud = new ReplyingCrud();
+        ReplyingCrudInterface crud = new ReplyingCrudImplementation();
         return crud.select(id);
 
     }
@@ -34,7 +35,7 @@ public class ReplyingDelegation implements ReplyingDelegationInt {
     @Override
     public void delegateUpdate(Integer id, Comments replying) {
 
-        ReplyingCrudInt crud = new ReplyingCrud();
+        ReplyingCrudInterface crud = new ReplyingCrudImplementation();
         crud.update(id, replying);
 
     }
@@ -42,7 +43,7 @@ public class ReplyingDelegation implements ReplyingDelegationInt {
     @Override
     public void delegateDelete(Integer id) {
 
-        ReplyingCrudInt crud = new ReplyingCrud();
+        ReplyingCrudInterface crud = new ReplyingCrudImplementation();
         crud.delete(id);
 
     }

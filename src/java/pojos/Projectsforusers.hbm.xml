@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 21, 2016 2:50:30 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jun 2, 2016 7:43:07 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Projectsforusers" table="projectsforusers" catalog="itiproject">
+    <class name="pojos.Projectsforusers" table="projectsforusers" catalog="itiproject" optimistic-lock="version">
         <id name="projectId" type="java.lang.Integer">
             <column name="projectId" />
-            <generator class="identity"></generator>
+            <generator class="identity" />
         </id>
-        <many-to-one name="categorytable" class="pojos.Categorytable" fetch="select">
+        <many-to-one name="category" class="pojos.Category" fetch="select">
             <column name="categoryId" not-null="true" />
         </many-to-one>
         <many-to-one name="users" class="pojos.Users" fetch="select">
@@ -24,30 +24,30 @@
             <column name="budget" not-null="true" />
         </property>
         <property name="startDate" type="date">
-            <column name="startDate" length="10" not-null="true" />
+            <column name="startDate" length="10" />
         </property>
         <property name="projectDeadLine" type="date">
             <column name="projectDeadLine" length="10" />
         </property>
-        <set name="porposas" table="porposa" inverse="true" lazy="true" fetch="select">
+        <set name="porposas" table="porposa" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="projectIdPor" not-null="true" />
             </key>
             <one-to-many class="pojos.Porposa" />
         </set>
-        <set name="projectsimageses" table="projectsimages" inverse="true" lazy="true" fetch="select">
+        <set name="projectsimageses" table="projectsimages" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="projectId" not-null="true" />
             </key>
             <one-to-many class="pojos.Projectsimages" />
         </set>
-        <set name="postforprojectses" table="postforprojects" inverse="true" lazy="true" fetch="select">
+        <set name="postforprojectses" table="postforprojects" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="projectId" not-null="true" />
             </key>
             <one-to-many class="pojos.Postforprojects" />
         </set>
-        <set name="skilltables" table="skillsforprojects" inverse="false" lazy="true" fetch="select">
+        <set name="skilltables" table="skillsforprojects" inverse="false" lazy="false" fetch="select">
             <key>
                 <column name="projectId" not-null="true" />
             </key>
@@ -55,13 +55,13 @@
                 <column name="skillId" not-null="true" />
             </many-to-many>
         </set>
-        <set name="detailses" table="details" inverse="true" lazy="true" fetch="select">
+        <set name="detailses" table="details" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="projectIdForDetails" not-null="true" />
             </key>
             <one-to-many class="pojos.Details" />
         </set>
-        <set name="tagsofprojectses" table="tagsofprojects" inverse="true" lazy="true" fetch="select">
+        <set name="tagsofprojectses" table="tagsofprojects" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="projectId" not-null="true" />
             </key>

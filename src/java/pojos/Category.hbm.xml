@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 2, 2016 7:43:07 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.Category" table="category" catalog="itiproject" optimistic-lock="version">
+        <id name="categoryId" type="java.lang.Integer">
+            <column name="categoryId" />
+            <generator class="identity" />
+        </id>
+        <property name="categoryName" type="string">
+            <column name="categoryName" length="100" not-null="true" />
+        </property>
+        <property name="imageOfCategoryUrl" type="string">
+            <column name="imageOfCategoryURL" length="100" not-null="true" />
+        </property>
+        <set name="tagses" table="tags" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="categoryId" />
+            </key>
+            <one-to-many class="pojos.Tags" />
+        </set>
+        <set name="portofolioforusers" table="portofolioforuser" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="categroyIdOfPortofolio" />
+            </key>
+            <one-to-many class="pojos.Portofolioforuser" />
+        </set>
+        <set name="projectsforuserses" table="projectsforusers" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="categoryId" not-null="true" />
+            </key>
+            <one-to-many class="pojos.Projectsforusers" />
+        </set>
+    </class>
+</hibernate-mapping>

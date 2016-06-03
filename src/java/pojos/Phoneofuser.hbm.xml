@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 21, 2016 2:50:30 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jun 2, 2016 7:43:07 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Phoneofuser" table="phoneofuser" catalog="itiproject">
+    <class name="pojos.Phoneofuser" table="phoneofuser" catalog="itiproject" optimistic-lock="version">
         <id name="phoneId" type="java.lang.Integer">
             <column name="phoneId" />
-            <generator class="identity"></generator>
+            <generator class="identity" />
         </id>
         <many-to-one name="users" class="pojos.Users" fetch="select">
             <column name="userIdForPhone" not-null="true" />

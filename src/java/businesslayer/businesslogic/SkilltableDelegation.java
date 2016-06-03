@@ -5,10 +5,11 @@
  */
 package businesslayer.businesslogic;
 
-import cruds.CrudInterface;
-import cruds.SkilltableCrud;
-import cruds.SkilltableCrudInt;
-import cruds.UsersCrud;
+import businesslayer.businesslogicinterface.SkilltableDelegationInt;
+import crudsinterface.CrudInterface;
+import cruds.SkilltableCrudImplementation;
+import crudsinterface.SkilltableCrudInterface;
+import cruds.UsersCrudImplementation;
 import pojos.Skilltable;
 
 /**
@@ -20,15 +21,15 @@ public class SkilltableDelegation implements SkilltableDelegationInt {
     @Override
     public void delegateInsert(Skilltable skilltable) {
 
-        SkilltableCrudInt crud = new SkilltableCrud();
+        SkilltableCrudInterface crud = new SkilltableCrudImplementation();
         crud.insert(skilltable);
 
     }
 
     @Override
-    public Skilltable delegateSelect(Integer id) {
+    public Skilltable delegateSelect(int id) {
 
-        SkilltableCrudInt crud = new SkilltableCrud();
+        SkilltableCrudInterface crud = new SkilltableCrudImplementation();
         return crud.select(id);
 
     }
@@ -36,7 +37,7 @@ public class SkilltableDelegation implements SkilltableDelegationInt {
     @Override
     public void delegateUpdate(Integer id, Skilltable skilltable) {
 
-        SkilltableCrudInt crud = new SkilltableCrud();
+        SkilltableCrudInterface crud = new SkilltableCrudImplementation();
         crud.update(id, skilltable);
 
     }
@@ -44,7 +45,7 @@ public class SkilltableDelegation implements SkilltableDelegationInt {
     @Override
     public void delegateDelete(Integer id) {
 
-        SkilltableCrudInt crud = new SkilltableCrud();
+        SkilltableCrudInterface crud = new SkilltableCrudImplementation();
         crud.delete(id);
 
     }

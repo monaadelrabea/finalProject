@@ -6,17 +6,24 @@
 package crudsinterface;
 
 import java.util.ArrayList;
-import pojos.Tagstable;
+import pojos.Tags;
 
 /**
  *
  * @author m@pc
  */
 public interface TagCrudInterface {
-   public ArrayList<Tagstable>  selectTags();
-   public Tagstable selectTag(int id);
-   public void insertTag(Tagstable t);
-   public void updateTag(Tagstable t);
-   public void deleteTag(int id);
-     
+
+    public ArrayList<Tags> selectTags();
+
+    public Tags selectTag(int id);
+
+    public Tags selectTag(String name);
+
+    public boolean insertTag(Tags t);
+
+    public boolean updateTag(Tags t);
+
+    public boolean deleteTag(int id);
+
 }

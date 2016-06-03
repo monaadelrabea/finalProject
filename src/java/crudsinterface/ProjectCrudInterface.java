@@ -13,10 +13,17 @@ import pojos.Projectsforusers;
  * @author m@pc
  */
 public interface ProjectCrudInterface {
-   public ArrayList<Projectsforusers> selectProjects(int id);
-   public Projectsforusers selectProject(int id);
-   public void insertProject(Projectsforusers  c);
-   public void updateProject(Projectsforusers c,int id);
-   public void deleteProject(int id);
+
+    public ArrayList<Projectsforusers> selectProjects(int id);
+
+    public Projectsforusers selectProject(int id);
+
+    public boolean insertProject(Projectsforusers c);
+
+    public boolean updateProject(Projectsforusers c, int id);
+
+    public boolean deleteProject(int id);
+    public ArrayList<Projectsforusers> selectLastInterd();
     
+
 }

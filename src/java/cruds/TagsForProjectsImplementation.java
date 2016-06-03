@@ -29,28 +29,31 @@ public class TagsForProjectsImplementation implements TagsForProjectsInterface {
     }
 
     @Override
-    public void insertTagsOfProjects(Tagsofprojects tg) {
-          Session se = SessionCreation.getSessionFactory().openSession();
-        try{
-       se.getTransaction().begin();
-       se.saveOrUpdate(tg);
-       se.getTransaction().commit();
-        }catch(HibernateException ex){
+    public boolean insertTagsOfProjects(Tagsofprojects tg) {
+        boolean flag = true;
+        Session se = SessionCreation.getSessionFactory().openSession();
+        try {
+            se.getTransaction().begin();
+            se.saveOrUpdate(tg);
+            se.getTransaction().commit();
+        } catch (HibernateException ex) {
             se.getTransaction().rollback();
             ex.printStackTrace();
-        }finally{
+            flag = false;
+        } finally {
             se.close();
         }
+        return flag;
     }
 
     @Override
-    public void updateTagsOfProjects(Tagsofprojects tg) {
+    public boolean updateTagsOfProjects(Tagsofprojects tg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deleteTagsOfProjects(int id) {
+    public boolean deleteTagsOfProjects(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

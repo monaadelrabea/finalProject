@@ -5,8 +5,9 @@
  */
 package businesslayer.businesslogic;
 
-import cruds.PostforprojectsCrud;
-import cruds.PostforprojectsCrudInt;
+import businesslayer.businesslogicinterface.PostforprojectsDelegationInt;
+import cruds.PostforprojectsCrudImplementation;
+import crudsinterface.PostforprojectsCrudInterface;
 import pojos.Postforprojects;
 
 /**
@@ -18,7 +19,7 @@ public class PostforprojectsDelegation implements PostforprojectsDelegationInt {
     @Override
     public void delegateInsert(Postforprojects postforprojects) {
 
-        PostforprojectsCrudInt crud = new PostforprojectsCrud();
+        PostforprojectsCrudInterface crud = new PostforprojectsCrudImplementation();
         crud.insert(postforprojects);
 
     }
@@ -26,7 +27,7 @@ public class PostforprojectsDelegation implements PostforprojectsDelegationInt {
     @Override
     public Postforprojects delegateSelect(Integer id) {
 
-        PostforprojectsCrudInt crud = new PostforprojectsCrud();
+        PostforprojectsCrudInterface crud = new PostforprojectsCrudImplementation();
         return crud.select(id);
 
     }
@@ -34,7 +35,7 @@ public class PostforprojectsDelegation implements PostforprojectsDelegationInt {
     @Override
     public void delegateUpdate(Integer id, Postforprojects postforprojects) {
 
-        PostforprojectsCrudInt crud = new PostforprojectsCrud();
+        PostforprojectsCrudInterface crud = new PostforprojectsCrudImplementation();
         crud.update(id, postforprojects);
 
     }
@@ -42,7 +43,7 @@ public class PostforprojectsDelegation implements PostforprojectsDelegationInt {
     @Override
     public void delegateDelete(Integer id) {
 
-        PostforprojectsCrudInt crud = new PostforprojectsCrud();
+        PostforprojectsCrudInterface crud = new PostforprojectsCrudImplementation();
         crud.delete(id);
 
     }

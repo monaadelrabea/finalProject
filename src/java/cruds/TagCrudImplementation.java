@@ -7,52 +7,89 @@ package cruds;
 
 import crudsinterface.TagCrudInterface;
 import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import pojos.Tagstable;
+import org.hibernate.criterion.Restrictions;
+import pojos.Tags;
+import pojos.Users;
 import seesioncreator.SessionCreation;
 
 /**
  *
  * @author m@pc
  */
-public class TagCrudImplementation  implements TagCrudInterface{
+public class TagCrudImplementation implements TagCrudInterface {
 
     @Override
-    public ArrayList<Tagstable> selectTags() {
+    public ArrayList<Tags> selectTags() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Tagstable selectTag(int id) {
+    public Tags selectTag(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void insertTag(Tagstable t) {
-   Session se = SessionCreation.getSessionFactory().openSession();
-        try{
-       se.getTransaction().begin();
-       se.saveOrUpdate(t);
-       se.getTransaction().commit();
-        }catch(HibernateException ex){
+    public boolean insertTag(Tags t) {
+        boolean flag = true;
+        Session se = SessionCreation.getSessionFactory().openSession();
+        try {
+            se.getTransaction().begin();
+            se.saveOrUpdate(t);
+            se.getTransaction().commit();
+        } catch (HibernateException ex) {
             se.getTransaction().rollback();
             ex.printStackTrace();
-        }finally{
+            flag = false;
+        } finally {
             se.close();
         }
+        return flag;
     }
-    
 
     @Override
-    public void updateTag(Tagstable t) {
+    public boolean updateTag(Tags t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deleteTag(int id) {
+    public boolean deleteTag(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
+    @Override
+    public Tags selectTag(String name) {
+
+        Tags t = null;
+
+        Session sc = SessionCreation.getSessionFactory().openSession();
+
+        try {
+            sc.beginTransaction();
+            Criteria cr = sc.createCriteria(Users.class);
+            cr.add(Restrictions.eq("tagDescription", name));
+            List tags = cr.list();
+            if (!tags.isEmpty()) {
+                t = (Tags) tags.get(0);
+            }
+            else
+            {
+            
+                t.setTagDescription(name);
+                
+            }
+            sc.getTransaction().commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            sc.close();
+        }
+
+        return t;
+
+    }
+
 }

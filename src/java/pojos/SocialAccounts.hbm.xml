@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 2, 2016 7:43:07 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojos.SocialAccounts" table="social_accounts" catalog="itiproject" optimistic-lock="version">
+        <id name="socialAccountId" type="java.lang.Integer">
+            <column name="social_account_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="users" class="pojos.Users" fetch="select">
+            <column name="user_id" not-null="true" />
+        </many-to-one>
+        <property name="providerUserId" type="string">
+            <column name="provider_user_id" not-null="true" />
+        </property>
+        <property name="provider" type="string">
+            <column name="provider" not-null="true" />
+        </property>
+        <property name="createdAt" type="timestamp">
+            <column name="created_at" length="19" not-null="true" />
+        </property>
+        <property name="updatedAt" type="timestamp">
+            <column name="updated_at" length="19" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

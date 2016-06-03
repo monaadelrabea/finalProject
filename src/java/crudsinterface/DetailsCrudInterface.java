@@ -15,9 +15,9 @@ import pojos.Details;
 public interface DetailsCrudInterface {
    public ArrayList<Details> selectDetails(int pId,int PrId);
    public Details selectDetails(int id);
-   public void insertDetails(Details d);
-   public void updateDetailsRate(Details d,int pId, int prId );
-   public void updateDetailsComment(Details d,int pId, int prId);
-   public void updateDetailsStatus(Details d,int pId, int prId);
-   public void deleteDetails(int id);
+   public boolean insertDetails(Details d);
+   public boolean updateDetailsRate(Details d,int pId, int prId );
+   public boolean updateDetailsComment(Details d,int pId, int prId);
+   public boolean updateDetailsStatus(Details d,int pId, int prId);
+   public boolean deleteDetails(int id);
 }

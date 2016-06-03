@@ -33,7 +33,8 @@ Session se = SessionCreation.getSessionFactory().openSession();
     }
 
     @Override
-    public void insertSkill(Skilltable s) {
+    public boolean insertSkill(Skilltable s) {
+        boolean flag=true;
      Session se = SessionCreation.getSessionFactory().openSession();
         try{
        se.getTransaction().begin();
@@ -42,19 +43,21 @@ Session se = SessionCreation.getSessionFactory().openSession();
         }catch(HibernateException ex){
             se.getTransaction().rollback();
             ex.printStackTrace();
+            flag=false;
         }finally{
             se.close();
         }
+        return flag;
     }
     
 
     @Override
-    public void updateSkill(Skilltable s) {
+    public boolean updateSkill(Skilltable s) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deleteSkill(int id) {
+    public boolean deleteSkill(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

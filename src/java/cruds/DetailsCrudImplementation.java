@@ -29,7 +29,8 @@ public class DetailsCrudImplementation implements DetailsCrudInterface{
     }
 
     @Override
-    public void insertDetails(Details d) {
+    public boolean insertDetails(Details d) {
+        boolean flag = true;
         Session se = SessionCreation.getSessionFactory().openSession();
         try{
        se.getTransaction().begin();
@@ -38,28 +39,30 @@ public class DetailsCrudImplementation implements DetailsCrudInterface{
         }catch(HibernateException ex){
             se.getTransaction().rollback();
             ex.printStackTrace();
+            flag=false;
         }finally{
             se.close();
         }
+        return  flag;
     }
     
     @Override
-    public void updateDetailsRate(Details d, int pId, int prId) {
+    public boolean updateDetailsRate(Details d, int pId, int prId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateDetailsComment(Details d, int pId, int prId) {
+    public boolean updateDetailsComment(Details d, int pId, int prId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void updateDetailsStatus(Details d, int pId, int prId) {
+    public boolean updateDetailsStatus(Details d, int pId, int prId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deleteDetails(int id) {
+    public boolean deleteDetails(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

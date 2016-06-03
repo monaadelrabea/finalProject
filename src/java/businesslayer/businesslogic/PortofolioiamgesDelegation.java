@@ -5,9 +5,10 @@
  */
 package businesslayer.businesslogic;
 
-import cruds.PortofolioiamgesCrud;
-import cruds.PortofolioiamgesCrudInt;
-import pojos.Portofolioiamges;
+import businesslayer.businesslogicinterface.PortofolioiamgesDelegationInt;
+import cruds.PortofolioiamgesCrudImplementation;
+import crudsinterface.PortofolioiamgesCrudInterface;
+import pojos.Portofolioimages;
 
 /**
  *
@@ -16,25 +17,25 @@ import pojos.Portofolioiamges;
 public class PortofolioiamgesDelegation implements PortofolioiamgesDelegationInt {
 
     @Override
-    public void delegateInsert(Portofolioiamges p) {
+    public void delegateInsert(Portofolioimages p) {
 
-        PortofolioiamgesCrudInt crud = new PortofolioiamgesCrud();
+        PortofolioiamgesCrudInterface crud = new PortofolioiamgesCrudImplementation();
         crud.insert(p);
 
     }
 
     @Override
-    public Portofolioiamges delegateSelect(Integer id) {
+    public Portofolioimages delegateSelect(Integer id) {
 
-        PortofolioiamgesCrudInt crud = new PortofolioiamgesCrud();
+        PortofolioiamgesCrudInterface crud = new PortofolioiamgesCrudImplementation();
         return crud.select(id);
 
     }
 
     @Override
-    public void delegateUpdate(Integer id, Portofolioiamges p) {
+    public void delegateUpdate(Integer id, Portofolioimages p) {
 
-        PortofolioiamgesCrudInt crud = new PortofolioiamgesCrud();
+        PortofolioiamgesCrudInterface crud = new PortofolioiamgesCrudImplementation();
         crud.update(id, p);
 
     }
@@ -42,7 +43,7 @@ public class PortofolioiamgesDelegation implements PortofolioiamgesDelegationInt
     @Override
     public void delegateDelete(Integer id) {
 
-        PortofolioiamgesCrudInt crud = new PortofolioiamgesCrud();
+        PortofolioiamgesCrudInterface crud = new PortofolioiamgesCrudImplementation();
         crud.delete(id);
 
     }

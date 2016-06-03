@@ -15,7 +15,7 @@ import pojos.Tagsofprojects;
 public interface TagsForProjectsInterface { 
    public ArrayList<Tagsofprojects> selectTagsOfProjects();
    public Tagsofprojects selectTagOfProjects(int id);
-   public void insertTagsOfProjects(Tagsofprojects tg);
-   public void updateTagsOfProjects(Tagsofprojects tg);
-   public void deleteTagsOfProjects(int id);
+   public boolean insertTagsOfProjects(Tagsofprojects tg);
+   public boolean updateTagsOfProjects(Tagsofprojects tg);
+   public boolean deleteTagsOfProjects(int id);
 }

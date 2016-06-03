@@ -7,9 +7,14 @@ package cruds;
 
 import crudsinterface.CategoryCrudInterface;
 import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import pojos.Categorytable;
+import org.hibernate.criterion.Restrictions;
+import pojos.Category;
+import pojos.Category;
+import pojos.Users;
 import seesioncreator.SessionCreation;
 
 /**
@@ -19,20 +24,34 @@ import seesioncreator.SessionCreation;
 public class CategoryCrudImplementation implements CategoryCrudInterface{
 
     @Override
-    public ArrayList<Categorytable> selectCategorys() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public ArrayList<Category> selectCategorys() {
+        List <Category> categories = new ArrayList<>();
+ Session sc = SessionCreation.getSessionFactory().openSession();
+
+        try {
+            sc.beginTransaction();
+            Criteria cr = sc.createCriteria(Category.class);
+           categories = cr.list();
+            sc.getTransaction().commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            sc.close();
+        }
+
+        return (ArrayList<Category>) categories;    }
 
     @Override
-    public Categorytable selectCategory(int id) {
-Session se = SessionCreation.getSessionFactory().openSession();  
+    public Category selectCategory(int id) {
+       Session se = SessionCreation.getSessionFactory().openSession();  
        se.getTransaction().begin();
-       Categorytable cat =(Categorytable) se.get(Categorytable.class, id);
+       Category cat =(Category) se.get(Category.class, id);
        se.close();
         return cat;    
     }
     @Override
-    public void insertCategoty(Categorytable c) {
+    public boolean insertCategoty(Category c) {
+        boolean flag =true;
         Session se = SessionCreation.getSessionFactory().openSession();
         try{
        se.getTransaction().begin();
@@ -40,19 +59,21 @@ Session se = SessionCreation.getSessionFactory().openSession();
        se.getTransaction().commit();
         }catch(HibernateException ex){
             se.getTransaction().rollback();
+            flag=false;
             ex.printStackTrace();
         }finally{
             se.close();
         }
+        return flag;
     }
 
     @Override
-    public void updateCategory(Categorytable c) {
+    public boolean updateCategory(Category c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deleteCategory(int id) {
+    public boolean deleteCategory(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

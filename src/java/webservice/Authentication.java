@@ -5,26 +5,22 @@
  */
 package webservice;
 
-import businesslayer.businesslogic.PhoneofuserDelegation;
+import businesslayer.businesslogic.SkilltableDelegation;
 import businesslayer.businesslogic.UsersDelegation;
-import businesslayer.bussiness.InsertingClass;
-import businesslayer.bussiness.ReturnList;
-import java.util.Arrays;
-import java.util.HashSet;
+import businesslayer.businesslogicinterface.SkilltableDelegationInt;
+import businesslayer.businesslogicinterface.UsersDelegationInt;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
-import javax.ws.rs.Consumes;
+import java.util.Map;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONObject;
-import pojos.Phoneofuser;
 import pojos.Skilltable;
 import pojos.Users;
 
@@ -37,84 +33,57 @@ public class Authentication {
 
     @POST
     @Path("/register")
-    public Response register(MultivaluedMap<String,String> val) throws Exception {
-        
-         Skilltable skl=new Skilltable();
-        skl.setSkillName("انتريهاتfslndlsug");
-        InsertingClass.insertSkill(skl);
-        Skilltable skl1=new Skilltable();
-        skl1.setSkillName("انتريهاتnvxhyu");
-        InsertingClass.insertSkill(skl1);
-        ReturnList r=new ReturnList();
-        UsersDelegation d=new UsersDelegation();
-        PhoneofuserDelegation dd=new PhoneofuserDelegation();
-        Users s= new Users();
-        String userEmail = val.getFirst("userEmail");
-        s.setUserEmail(userEmail);
-        String userImageUrl= val.getFirst("userImageURL");
-        s.setUserImageUrl(userImageUrl);
-        String password= val.getFirst("password");
-        s.setPassword(password);
+    public Response register(MultivaluedMap<String, String> val) throws Exception {
+
+        UsersDelegation ud = new UsersDelegation();
+        String userEmail = val.getFirst("userEmail");;
+        String userImageUrl = val.getFirst("userImage");
+        String password = val.getFirst("password");
         boolean gender = Boolean.parseBoolean(val.getFirst("gender"));
-        s.setGender(gender);
         String userName = val.getFirst("userName");
-        s.setUserName(userName);
-        int ped = Integer.parseInt(val.getFirst("ped"));
-        s.setPed(ped);
+        int ped = Integer.parseInt("0");
         String country = val.getFirst("country");
-        s.setCountry(country);
-        String governorate= val.getFirst("governorate");
-        s.setGovernorate(governorate);
+        String governorate = val.getFirst("governorate");
         String city = val.getFirst("ciry");
-        s.setCity(city);
-        String street =val.getFirst("street");
-        s.setStreet(street);
-        String summery=val.getFirst("summery");
-        s.setSummery(summery);
-        String profissionalTitle =val.getFirst("Title");
-        s.setProfessinalTiltle(profissionalTitle);
-        String identifire=val.getFirst("identifire");
-        s.setIdentefire(identifire);
+        String street = val.getFirst("street");
+        String summery = val.getFirst("summery");
+        String profissionalTitle = val.getFirst("Title");
+        String identifire = val.getFirst("identifire");
         /////////////////////////////////////////////////////////////////mobiles
-        String mobile =val.getFirst("mobiles");
-        List<String> mobiles = Arrays.asList(mobile.split(","));
-        List<Phoneofuser> ph1= r.returnMobiles(mobiles);
-        ////////////////////////////////////////////////////////////////phones
-        String phone =val.getFirst("phones");
-        List<String> phones= Arrays.asList(phone.split(","));
-        List<Phoneofuser> ph2= r.returnPhones1(phones);
-        /////////////////////////////////////////////////////////all phones of user
-        List<Phoneofuser> ph3= r.returnPhones1(ph1,ph2);
-        ///////////////////////////////////////////////////////////////Skills
-        String Skills =val.getFirst("skill");
-        List<String> sk = Arrays.asList((Skills.split(",")));
-        List<Integer>  ss=r.returnSkills(sk);
-        List<Skilltable> st=r.returnSkillsAll(ss);
-        Set sss =new HashSet(st);
-     
-        for(int i=0;i<st.size();i++){
-             s.getSkilltables().add(st.get(i));
-             d.delegateInsert(s);    
-             System.out.println(st.get(i).getSkillId());
-       }
-        System.out.println(s.getSkilltables());
-        
-        ////////////////////////////////////////////////////////////////////////
-        
-         for(int i=0;i<ph3.size();i++){
-          ph3.get(i).setUsers(s);
-          dd.delegateInsert(ph3.get(i));
-        }
-         
-        System.out.println(userEmail);
-        String output = "The input you sent is :" + userEmail;
-        System.out.println(output);
+        String mobile = val.getFirst("mobiles");
+        //////////////////////////////////////////////////////////////////phones
+        String phones = val.getFirst("phones");
+        //////////////////////////////////////////////////////////////////Skills
+        String Skills = val.getFirst("skill");
+
+        Boolean output = ud.delegateInsert(userEmail, userImageUrl, password, gender, userName, ped, country, governorate, city, street, summery, profissionalTitle, identifire, mobile, phones, Skills);
         JSONObject outputJsonObj1 = new JSONObject();
-        outputJsonObj1.put("phones", phones);
-         outputJsonObj1.put("skill", st);
-        outputJsonObj1.put("mobiles", mobiles);
-        outputJsonObj1.put("output", output);
+           System.out.println(output);
+        if (output == true) {
+            System.out.println(output);
+            outputJsonObj1.put("output", "tureInsert");
+        } else {
+            outputJsonObj1.put("output", "there is some empty data please inter it");
+        }
         return Response.status(200).entity(outputJsonObj1).build();
+    }
+
+    
+    @POST
+    @Path("/login")
+    public Response login(MultivaluedMap<String, String> val) throws Exception {
+
+        UsersDelegationInt usersDelegationInt = new UsersDelegation();
+        Users u = usersDelegationInt.delegateSelectEP(val.getFirst("email"), val.getFirst("pass"));
+        String code = "1";
+        String message = "true";
+        Gson g = new GsonBuilder().serializeNulls().excludeFieldsWithoutExposeAnnotation().create();
+        Map<String, Object> map = new HashMap();
+        map.put("code", code);
+        map.put("message", message);
+        map.put("user", u);
+
+        return Response.status(200).entity(g.toJson(map)).build();
     }
 
     @GET
@@ -129,20 +98,32 @@ public class Authentication {
 
         return Response.status(200).entity(outputJsonObj).build();
     }
-    
-   @GET
-	@Path("/query")
-	public Response getUsers(
-		@QueryParam("from") int from,
-		@QueryParam("to") int to,
-		@QueryParam("orderBy") List<String> orderBy) {
 
-		return Response
-		   .status(200)
-		   .entity("getUsers is called, from : " + from + ", to : " + to
-			+ ", orderBy" + orderBy.toString()).build();
+    @GET
+    @Path("/query")
+    public Response getUsers(
+            @QueryParam("from") int from,
+            @QueryParam("to") int to,
+            @QueryParam("orderBy") List<String> orderBy) {
 
-	}
-  
+        return Response
+                .status(200)
+                .entity("getUsers is called, from : " + from + ", to : " + to
+                        + ", orderBy" + orderBy.toString()).build();
+
+    }
+
+    @GET
+    @Path("/querySkill")
+    public Response getSkills() {
+        Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        SkilltableDelegationInt s = new SkilltableDelegation();
+        Skilltable n = s.delegateSelect(92);
+        String out = g.toJson(n);
+        return Response
+                .status(200)
+                .entity("getUsers is called, from :" + out).build();
+
+    }
 
 }

@@ -5,9 +5,20 @@
  */
 package businesslayer.businesslogic;
 
-import cruds.UsersCrud;
+import businesslayer.businesslogicinterface.SkilltableDelegationInt;
+import businesslayer.businesslogicinterface.UsersDelegationInt;
+import businesslayer.bussiness.ReturnList;
+import businesslayer.validations.ValidaionClass;
+import cruds.UsersCrudImplementation;
 import pojos.Users;
-import cruds.UsersCrudInt;
+import crudsinterface.UsersCrudInterface;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import pojos.Phoneofuser;
+import pojos.Skilltable;
 
 /**
  *
@@ -15,36 +26,94 @@ import cruds.UsersCrudInt;
  */
 public class UsersDelegation implements UsersDelegationInt {
 
+  
     @Override
-    public void delegateInsert(Users u) {
+    public Users delegateSelect(int id) {
 
-        UsersCrudInt crud = new UsersCrud();
-        crud.insert(u);
-
-    }
-
-    @Override
-    public Users delegateSelect(Integer id) {
-
-        UsersCrudInt crud = new UsersCrud();
+        UsersCrudInterface crud = new UsersCrudImplementation();
         return crud.select(id);
 
     }
 
     @Override
-    public void delegateUpdate(Integer id, Users u) {
+    public boolean delegateInsert(String userEmail, String userImageUrl, String password, boolean gender, String userName, int ped, String country, String governorate, String city, String street, String summery, String profissionalTitle, String identifire, String mobile, String phones, String Skills) {
+    UsersCrudInterface crud = new UsersCrudImplementation();
+     ReturnList r=new ReturnList();
+      SkilltableDelegationInt sd= new  SkilltableDelegation();
+        PhoneofuserDelegation phd=new PhoneofuserDelegation();
+        Users user= new Users();
+        user.setUserEmail(userEmail);
+        user.setUserImageUrl(userImageUrl);
+        user.setPassword(password);
+        user.setGender(gender);
+        user.setUserName(userName);
+        user.setPed(ped);
+        user.setCountry(country);
+        user.setGovernorate(governorate);
+        user.setCity(city);
+        user.setStreet(street);
+        user.setSummery(summery);
+        user.setProfessinalTiltle(profissionalTitle);
+        user.setIdentefire(identifire);
+        /////////////////////////////////////////////////////////////////mobiles
+        List<String> mobiles = Arrays.asList(mobile.split(","));
+        List<Phoneofuser> ph1= r.returnMobiles(mobiles);
+        ////////////////////////////////////////////////////////////////phones
+        List<String> phonesList= Arrays.asList(phones.split(","));
+        List<Phoneofuser> ph2= r.returnPhones1(phonesList);
+        /////////////////////////////////////////////////////////all phones of user
+        List<Phoneofuser> ph3= r.returnPhones1(ph1,ph2);
+        /////////////////////////////////////////////////////////Skills
+        List<String> skList = Arrays.asList((Skills.split(",")));
+        List<Integer>  sk=r.returnSkills(skList);
+        List<Skilltable> stList=r.returnSkillsAll(sk);
+        List<Users> uList= new ArrayList<>();
+        uList.add(user);
+        Set<Skilltable> sss =new HashSet(stList);
+        Set<Users> uSet=new HashSet(uList);
+        user.setSkilltables(sss);
+        System.out.println(user.getSkilltables());
+         boolean out;
+        if(ValidaionClass.insertNewUserValidate(userEmail, userImageUrl, password, gender, userName, ped, country, governorate, city, street, summery, profissionalTitle, identifire, mobile, phones, Skills)){
+         out=crud.insert(user);  
+        }else{
+            out=false;
+        }
+       
+        for(int i=0;i<stList.size();i++){
+        stList.get(i).setUserses(uSet);
+        sd.delegateInsert(stList.get(i));
+       }
+        ////////////////////////////////////////////////////////////////////////
+        
+         for(int i=0;i<ph3.size();i++){
+          ph3.get(i).setUsers(user);
+          phd.delegateInsert(ph3.get(i));
+        }
+        
+    return out;
+    }
 
-        UsersCrudInt crud = new UsersCrud();
-        crud.update(id, u);
+  
+    @Override
+    public Users delegateSelectEP(String email, String password) {
+
+        UsersCrudInterface crud = new UsersCrudImplementation();
+        return crud.selectEP(email, password);
 
     }
+ 
+    @Override
+    public boolean delegateUpdate(int id, Users u) {
+UsersCrudInterface crud = new UsersCrudImplementation();
+        crud.update(id, u);
+    return true;}
 
     @Override
-    public void delegateDelete(Integer id) {
+    public boolean delegateDelete(int id) {
 
-        UsersCrudInt crud = new UsersCrud();
+        UsersCrudInterface crud = new UsersCrudImplementation();
         crud.delete(id);
-
-    }
+    return true;}
 
 }

@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 21, 2016 2:50:30 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jun 2, 2016 7:43:07 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Users" table="users" catalog="itiproject">
+    <class name="pojos.Users" table="users" catalog="itiproject" optimistic-lock="version">
         <id name="userId" type="java.lang.Integer">
             <column name="userId" />
-            <generator class="identity"></generator>
+            <generator class="identity" />
         </id>
         <property name="userEmail" type="string">
-            <column name="userEmail" not-null="true" />
+            <column name="userEmail" not-null="true" unique="true" />
         </property>
         <property name="userImageUrl" type="string">
             <column name="userImageURL" not-null="true" />
@@ -45,39 +45,51 @@
             <column name="professinalTiltle" length="100" not-null="true" />
         </property>
         <property name="identefire" type="string">
-            <column name="identefire" length="100" not-null="true" />
+            <column name="identefire" length="100" />
         </property>
-        <set name="phoneofusers" table="phoneofuser" inverse="true" lazy="true" fetch="select">
+        <property name="token" type="string">
+            <column name="token" />
+        </property>
+        <property name="rate" type="java.lang.Integer">
+            <column name="rate" />
+        </property>
+        <set name="phoneofusers" table="phoneofuser" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="userIdForPhone" not-null="true" />
             </key>
             <one-to-many class="pojos.Phoneofuser" />
         </set>
-        <set name="portofolioforusers" table="portofolioforuser" inverse="true" lazy="true" fetch="select">
+        <set name="socialAccountses" table="social_accounts" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="user_id" not-null="true" />
+            </key>
+            <one-to-many class="pojos.SocialAccounts" />
+        </set>
+        <set name="portofolioforusers" table="portofolioforuser" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="userIdPortf" not-null="true" />
             </key>
             <one-to-many class="pojos.Portofolioforuser" />
         </set>
-        <set name="projectsforuserses" table="projectsforusers" inverse="true" lazy="true" fetch="select">
+        <set name="projectsforuserses" table="projectsforusers" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="ownerIdForProject" not-null="true" />
             </key>
             <one-to-many class="pojos.Projectsforusers" />
         </set>
-        <set name="porposas" table="porposa" inverse="true" lazy="true" fetch="select">
+        <set name="porposas" table="porposa" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="suplierIdPor" not-null="true" />
             </key>
             <one-to-many class="pojos.Porposa" />
         </set>
-        <set name="postforprojectses" table="postforprojects" inverse="true" lazy="true" fetch="select">
+        <set name="postforprojectses" table="postforprojects" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="supliersIdForQuestion" not-null="true" />
             </key>
             <one-to-many class="pojos.Postforprojects" />
         </set>
-        <set name="skilltables" table="skillsofuser" inverse="true" lazy="true" fetch="select">
+        <set name="skilltables" table="skillsofuser" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="userIdForSkill" not-null="true" />
             </key>

@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 21, 2016 2:50:30 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jun 2, 2016 7:43:07 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Porposa" table="porposa" catalog="itiproject">
+    <class name="pojos.Porposa" table="porposa" catalog="itiproject" optimistic-lock="version">
         <id name="porpId" type="java.lang.Integer">
             <column name="porpId" />
-            <generator class="identity"></generator>
+            <generator class="identity" />
         </id>
         <many-to-one name="projectsforusers" class="pojos.Projectsforusers" fetch="select">
             <column name="projectIdPor" not-null="true" />
@@ -18,15 +18,15 @@
             <column name="price" not-null="true" />
         </property>
         <property name="startDatePor" type="date">
-            <column name="startDatePor" length="10" not-null="true" />
+            <column name="startDatePor" length="10" />
         </property>
         <property name="deadLinePor" type="date">
-            <column name="deadLinePor" length="10" not-null="true" />
+            <column name="deadLinePor" length="10" />
         </property>
         <property name="statusOfPorposa" type="string">
             <column name="statusOfPorposa" not-null="true" />
         </property>
-        <set name="detailses" table="details" inverse="true" lazy="true" fetch="select">
+        <set name="detailses" table="details" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="porposerIdForDetails" not-null="true" />
             </key>

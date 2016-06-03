@@ -18,8 +18,8 @@ public interface SkillCrudInterface {
     
    public ArrayList<Skilltable>  selectSkills();
    public Skilltable selectSkill(int id);
-   public void insertSkill(Skilltable s);
-   public void updateSkill(Skilltable s);
-   public void deleteSkill(int id);
+   public boolean insertSkill(Skilltable s);
+   public boolean updateSkill(Skilltable s);
+   public boolean deleteSkill(int id);
      
 }

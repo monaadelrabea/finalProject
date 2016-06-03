@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 21, 2016 2:50:30 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jun 2, 2016 7:43:07 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojos.Details" table="details" catalog="itiproject">
+    <class name="pojos.Details" table="details" catalog="itiproject" optimistic-lock="version">
         <composite-id name="id" class="pojos.DetailsId">
             <key-property name="porposerIdForDetails" type="int">
                 <column name="porposerIdForDetails" />
@@ -21,17 +21,17 @@
         <property name="statusOfProjects" type="string">
             <column name="statusOfProjects" length="100" not-null="true" />
         </property>
-        <property name="rateForOwner" type="int">
-            <column name="rateForOwner" not-null="true" />
+        <property name="rateForOwner" type="java.lang.Integer">
+            <column name="rateForOwner" />
         </property>
-        <property name="rateForSuppliers" type="int">
-            <column name="rateForSuppliers" not-null="true" />
+        <property name="rateForSuppliers" type="java.lang.Integer">
+            <column name="rateForSuppliers" />
         </property>
         <property name="commentFromOwner" type="string">
-            <column name="commentFromOwner" not-null="true" />
+            <column name="commentFromOwner" />
         </property>
         <property name="commentFromSuppliers" type="string">
-            <column name="commentFromSuppliers" not-null="true" />
+            <column name="commentFromSuppliers" />
         </property>
     </class>
 </hibernate-mapping>

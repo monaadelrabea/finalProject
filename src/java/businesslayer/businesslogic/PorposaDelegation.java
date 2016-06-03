@@ -5,9 +5,19 @@
  */
 package businesslayer.businesslogic;
 
-import cruds.PorposaCrud;
-import cruds.PorposaCrudInt;
+import businesslayer.businesslogicinterface.PorposaDelegationInt;
+import cruds.PorposaCrudImplementation;
+import cruds.PortofolioforuserCrudImplementation;
+import cruds.ProjectCrudImplementation;
+import cruds.UsersCrudImplementation;
+import crudsinterface.PorposaCrudInterface;
+import crudsinterface.PortofolioforuserCrudInterface;
+import crudsinterface.ProjectCrudInterface;
+import crudsinterface.UsersCrudInterface;
+import java.util.Date;
 import pojos.Porposa;
+import pojos.Projectsforusers;
+import pojos.Users;
 
 /**
  *
@@ -15,18 +25,12 @@ import pojos.Porposa;
  */
 public class PorposaDelegation implements PorposaDelegationInt {
 
-    @Override
-    public void delegateInsert(Porposa porposa) {
-
-        PorposaCrudInt crud = new PorposaCrud();
-        crud.insert(porposa);
-
-    }
+  
 
     @Override
     public Porposa delegateSelect(Integer id) {
 
-        PorposaCrudInt crud = new PorposaCrud();
+        PorposaCrudInterface crud = new PorposaCrudImplementation();
         return crud.select(id);
 
     }
@@ -34,7 +38,7 @@ public class PorposaDelegation implements PorposaDelegationInt {
     @Override
     public void delegateUpdate(Integer id, Porposa porposa) {
 
-        PorposaCrudInt crud = new PorposaCrud();
+        PorposaCrudInterface crud = new PorposaCrudImplementation();
         crud.update(id, porposa);
 
     }
@@ -42,9 +46,32 @@ public class PorposaDelegation implements PorposaDelegationInt {
     @Override
     public void delegateDelete(Integer id) {
 
-        PorposaCrudInt crud = new PorposaCrud();
+        PorposaCrudInterface crud = new PorposaCrudImplementation();
         crud.delete(id);
 
+    }
+
+    @Override
+    public boolean delegateInsert(String price, String startDate, String deadLine, String projectId, String SuplierId, String projectStatus) {
+      boolean flag;
+        Porposa p= new Porposa();
+         Projectsforusers pu=new Projectsforusers();
+          Users u=new Users();
+       PorposaCrudInterface cr = new PorposaCrudImplementation();
+       ProjectCrudInterface pp=new ProjectCrudImplementation();
+       int pid=Integer.parseInt(projectId);
+        pu=pp.selectProject(pid);
+       UsersCrudInterface crud = new UsersCrudImplementation();
+      int uid=Integer.parseInt(SuplierId);
+        u=crud.select(uid);
+        p.setPrice(Integer.parseInt(price));
+        p.setStartDatePor(new Date());
+        p.setDeadLinePor(new Date());
+        p.setProjectsforusers(pu);
+        p.setUsers(u);
+        p.setStatusOfPorposa(projectStatus);
+        flag= cr.insert(p); 
+  return flag;
     }
 
 }
