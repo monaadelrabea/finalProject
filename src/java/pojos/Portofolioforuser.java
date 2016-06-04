@@ -27,7 +27,7 @@ public class Portofolioforuser implements java.io.Serializable {
     private Integer portofolioId;
     
     private Category category;
-    @Expose
+ 
     private Users users;
     @Expose
     private String portofolioDescription;
@@ -71,7 +71,7 @@ public class Portofolioforuser implements java.io.Serializable {
         this.category = category;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userIdPortf", nullable = false)
     public Users getUsers() {
         return this.users;

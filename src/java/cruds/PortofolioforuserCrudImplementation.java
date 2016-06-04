@@ -109,7 +109,7 @@ return flag;
             sc.beginTransaction();
             Criteria cr = sc.createCriteria(Portofolioforuser.class);
           cr.add(Restrictions.eq("category.categoryId", cat.getCategoryId()));
-          cr.add(Restrictions.sqlRestriction("1=1 order by rand()"));
+          cr.add(Restrictions.sqlRestriction("4=4 order by rand()"));
           portofolios = cr.list();
             sc.getTransaction().commit();
         } catch (HibernateException e) {

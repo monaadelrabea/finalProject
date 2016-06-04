@@ -61,7 +61,7 @@ public static  ArrayList<Projectsforusers> ProjectsForUser =new ArrayList<>();
      for(int i= footer; i<4 && i<ProjectsForUser.size() ;i++){
      portofolios.add(ProjectsForUser.get(i));
      }
-      Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();      
+      Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();      
      String out=g.toJson(portofolios);
       Map<String, Object> map =new HashMap();
       map.put("satatus", true);
@@ -90,7 +90,7 @@ public static  ArrayList<Projectsforusers> ProjectsForUser =new ArrayList<>();
         int id=Integer.parseInt(val.getFirst("uId"));
         ProjectDelegationInt delegationInt = new ProjectDelegation();
        ArrayList<Projectsforusers> categories=delegationInt.selectProjects(id);
-      Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();      
+      Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();      
      String out=g.toJson(categories);
       Map<String, Object> map =new HashMap();
       map.put("satatus", true);
@@ -105,7 +105,7 @@ public static  ArrayList<Projectsforusers> ProjectsForUser =new ArrayList<>();
         int id=Integer.parseInt(val.getFirst("uId"));
         PorposaDelegationInt delegationInt = new PorposaDelegation();
        ArrayList<Object> categories=delegationInt.projectsIds(id);
-      Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();      
+      Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();      
      String out=g.toJson(categories);
       Map<String, Object> map =new HashMap();
       map.put("satatus", true);

@@ -252,7 +252,7 @@ public class Users implements java.io.Serializable {
         this.rate = rate;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
     public Set<Phoneofuser> getPhoneofusers() {
         return this.phoneofusers;
     }
