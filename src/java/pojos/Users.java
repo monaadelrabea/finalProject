@@ -29,7 +29,7 @@ public class Users implements java.io.Serializable {
     private String userEmail;
     @Expose
     private String userImageUrl;
-    @Expose
+    
     private String password;
     @Expose
     private boolean gender;
