@@ -114,14 +114,7 @@ public class ProjectCrudImplementation implements ProjectCrudInterface {
     }
     
     
-    public ArrayList<Projectsforusers> projectsId(int porId){
-    List<Projectsforusers> pIds=new ArrayList<>();
-   Session sc = SessionCreation.getSessionFactory().openSession();
-      Query m=sc.createQuery("select * from projectsforusers where  projectsforusers.projectId =( select projectsforusers.projectId from Porposa where porpId=?)");
-       m.setInteger(0, porId);
-       pIds = m.list();
-        return (ArrayList<Projectsforusers>) pIds;   
-}
+ 
     
    
 }
