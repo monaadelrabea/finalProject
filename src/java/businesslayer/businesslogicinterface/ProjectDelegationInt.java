@@ -22,5 +22,10 @@ public interface ProjectDelegationInt {
     public void delegateUpdate(int id, Projectsforusers p);
 
     public void delegateDelete(int id);
+    
+       public ArrayList<Projectsforusers> selectProjects(int id);
+               
     public ArrayList<Projectsforusers> selectLastInterd();
+    
+    public ArrayList<Projectsforusers> selectBestProjects();
 }

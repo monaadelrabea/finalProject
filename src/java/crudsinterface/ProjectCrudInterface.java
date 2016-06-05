@@ -23,7 +23,9 @@ public interface ProjectCrudInterface {
     public boolean updateProject(Projectsforusers c, int id);
 
     public boolean deleteProject(int id);
+    
     public ArrayList<Projectsforusers> selectLastInterd();
     
+   public ArrayList<Projectsforusers> selectBestProjects();
 
 }

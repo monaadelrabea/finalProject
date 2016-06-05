@@ -123,13 +123,50 @@ public class UsersCrudImplementation implements UsersCrudInterface {
 
     @Override
     public ArrayList<Users> selectMaxRateUsers() {
+        ArrayList<Integer> maxRate=maxValue();
+          List<Users> maxRateOfUsers=new ArrayList<>();
+         Session session = SessionCreation.getSessionFactory().openSession();
+Criteria criteria = session.createCriteria(Users.class);
+System.out.println(maxRate.get(0));
+    //criteria.add(Restrictions.eq("rate", maxRate.get(0)));
+             criteria.add(Restrictions.in("rate", maxRate));
+                criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
+                criteria.setMaxResults(6);
+             System.out.println(maxRate.get(1));
+     maxRateOfUsers=criteria.list();
+    return (ArrayList<Users>) maxRateOfUsers;
+    }
+    
+public ArrayList<Users> selectAllUsers() {
         ArrayList<Users> maxRate= new ArrayList<>();
          Session session = SessionCreation.getSessionFactory().openSession();
-Criteria criteria = session
-   .createCriteria(Users.class)
-   .setProjection(Projections.max("rate")); 
+Criteria criteria = session.createCriteria(Users.class);
     maxRate=(ArrayList<Users>) criteria.list();
     return maxRate;
     }
+public ArrayList<Integer> maxValue() {
+      ArrayList<Users> usersAll= selectAllUsers() ;
+         ArrayList<Integer> users= new ArrayList<>() ;
+        int rate1=0;
+        int rate2=0;
+        int max=usersAll.get(0).getRate();
+          int max2=usersAll.get(0).getRate();
+        for(int i=0;i<usersAll.size();i++){
+         if(usersAll.get(i).getRate()>max) {
+           max=usersAll.get(i).getRate();
+           users.add(usersAll.get(i).getRate());
+           rate1=usersAll.get(i).getRate();
+         }
+          if(usersAll.get(i).getRate()> max2 && usersAll.get(i).getRate()< rate1) {
+            max2=usersAll.get(i).getRate();
+           users.add(usersAll.get(i).getRate());
+           rate2=usersAll.get(i).getRate();
+         }
+        }
+      System.out.println(rate1);
+         System.out.println(rate2);
+    return users;
+    }
+
 
 }

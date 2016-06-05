@@ -44,13 +44,13 @@ public static  ArrayList<Portofolioforuser> PortofoliosForUser =new ArrayList<>(
     Category catt=cat.delegateSelect(categoryId);
        PortofoliosForUser=por.selectPortofolios(catt);
      ArrayList<Portofolioforuser> portofolios =new ArrayList<>();
-     for(int i=footer;i<4;i++){
+     for(int i=footer;i<4 && i<PortofoliosForUser.size();i++){
      portofolios.add(PortofoliosForUser.get(i));
      }
  Gson gson = new GsonBuilder()
     .excludeFieldsWithModifiers(Modifier.STATIC, Modifier.TRANSIENT, Modifier.VOLATILE)
     .create();
-      Gson g = new GsonBuilder().serializeNulls().excludeFieldsWithoutExposeAnnotation().create();
+      Gson g = new GsonBuilder().serializeNulls().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
         Map<String, Object> map =new HashMap();
       map.put("satatus", true);
       map.put("portofolios", portofolios); 
@@ -63,9 +63,7 @@ public static  ArrayList<Portofolioforuser> PortofoliosForUser =new ArrayList<>(
     String message = "";
     int id =Integer.parseInt(val.getFirst("portId"));
       Users u=o.delegateSelect(por.selectUser(id).getUserId());
-// Gson gson = new GsonBuilder()
-//    .excludeFieldsWithModifiers(Modifier.STATIC, Modifier.TRANSIENT, Modifier.VOLATILE)
-//    .create();
+
       Gson g = new GsonBuilder().serializeNulls().excludeFieldsWithoutExposeAnnotation().create();
         Map<String, Object> map =new HashMap();
       map.put("satatus", true);

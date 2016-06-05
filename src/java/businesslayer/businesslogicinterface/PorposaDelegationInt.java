@@ -21,5 +21,5 @@ public interface PorposaDelegationInt {
     public void delegateUpdate(Integer id, Porposa porposa);
 
     public void delegateDelete(Integer id);
-
+    public boolean delegateInsert(Porposa porposa);
 }

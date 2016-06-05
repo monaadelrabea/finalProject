@@ -38,12 +38,16 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(webservice.Authentication.class);
         resources.add(webservice.CategoryWebServ.class);
+        resources.add(webservice.DetailsWebService.class);
         resources.add(webservice.HelloWorldService.class);
         resources.add(webservice.PorposerWebService.class);
         resources.add(webservice.PortofolioWebService.class);
         resources.add(webservice.ProjectWebService.class);
+        resources.add(webservice.QuestionsWebService.class);
+        resources.add(webservice.Status.class);
         resources.add(webservice.TagsWebService.class);
         resources.add(webservice.UserWebService.class);
+        resources.add(webservice.upload.class);
     }
     
 }

@@ -34,11 +34,27 @@ public class UserWebService {
         String message = "";
         UsersDelegationInt user = new UsersDelegation();
         Users u = user.delegateSelect(userId);
-        Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().serializeNulls().create();
         //String out=g.toJson(user);
         Map<String, Object> map = new HashMap();
         map.put("satatus", true);
         map.put("categories", u);
+        //System.out.println(out);
+        return Response.status(200).entity(g.toJson(map)).build();
+    }
+    
+      @GET
+    @Path("/getMaxUser")
+    public Response selectMaxUser() throws Exception {
+        System.out.println("in method");
+        String message = "";
+        UsersDelegationInt user = new UsersDelegation();
+       ArrayList<Users>  u = user.selectMaxRateUsers();
+        Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().serializeNulls().create();
+        Map<String, Object> map = new HashMap();
+        map.put("satatus", true);
+        map.put("users", u);
+        System.out.println(u);
         //System.out.println(out);
         return Response.status(200).entity(g.toJson(map)).build();
     }

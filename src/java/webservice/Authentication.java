@@ -58,7 +58,7 @@ public class Authentication {
 
         Boolean output = ud.delegateInsert(userEmail, userImageUrl, password, gender, userName, ped, country, governorate, city, street, summery, profissionalTitle, identifire, mobile, phones, Skills);
         JSONObject outputJsonObj1 = new JSONObject();
-           System.out.println(output);
+        System.out.println(output);
         if (output == true) {
             System.out.println(output);
             outputJsonObj1.put("output", "tureInsert");
@@ -68,7 +68,6 @@ public class Authentication {
         return Response.status(200).entity(outputJsonObj1).build();
     }
 
-    
     @POST
     @Path("/login")
     public Response login(MultivaluedMap<String, String> val) throws Exception {
@@ -77,7 +76,7 @@ public class Authentication {
         Users u = usersDelegationInt.delegateSelectEP(val.getFirst("email"), val.getFirst("pass"));
         String code = "1";
         String message = "true";
-        Gson g = new GsonBuilder().serializeNulls().excludeFieldsWithoutExposeAnnotation().create();
+        Gson g = new GsonBuilder().serializeNulls().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
         Map<String, Object> map = new HashMap();
         map.put("code", code);
         map.put("message", message);

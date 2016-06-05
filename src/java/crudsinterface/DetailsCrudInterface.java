@@ -7,17 +7,25 @@ package crudsinterface;
 
 import java.util.ArrayList;
 import pojos.Details;
+import pojos.DetailsId;
 
 /**
  *
  * @author m@pc
  */
 public interface DetailsCrudInterface {
-   public ArrayList<Details> selectDetails(int pId,int PrId);
-   public Details selectDetails(int id);
-   public boolean insertDetails(Details d);
-   public boolean updateDetailsRate(Details d,int pId, int prId );
-   public boolean updateDetailsComment(Details d,int pId, int prId);
-   public boolean updateDetailsStatus(Details d,int pId, int prId);
-   public boolean deleteDetails(int id);
+
+    public ArrayList<Details> selectDetails(int pId, int PrId);
+
+    public Details selectDetails(DetailsId id);
+
+    public boolean insertDetails(Details d);
+
+    public boolean updateDetailsRate(Details d, int pId, int prId);
+
+    public boolean updateDetailsComment(Details d, int pId, int prId);
+
+    public boolean updateDetailsStatus(Details d, int pId, int prId);
+
+    public boolean deleteDetails(int id);
 }

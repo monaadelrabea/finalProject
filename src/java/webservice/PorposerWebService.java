@@ -23,7 +23,7 @@ import org.codehaus.jettison.json.JSONObject;
 public class PorposerWebService {
     @POST
     @Path("/insertPorposer")
-    public Response register(MultivaluedMap<String, String> val) throws Exception {
+    public Response register( MultivaluedMap<String, String> val) throws Exception {
 
         PorposaDelegation ud = new PorposaDelegation();
         String price = val.getFirst("price");;
@@ -31,7 +31,7 @@ public class PorposerWebService {
        String deadLine = val.getFirst("deadLine");
         String projectId = val.getFirst("pId");
         String SuplierId = val.getFirst("uId");
-       String projectStatus = val.getFirst(" projectStatus");
+       String projectStatus = "applying";
         Boolean output = ud.delegateInsert(price, startDate, deadLine, projectId, SuplierId, projectStatus);
         JSONObject outputJsonObj1 = new JSONObject();
         if (output == true) {

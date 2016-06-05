@@ -6,12 +6,14 @@
 package cruds;
 
 import crudsinterface.ProjectCrudInterface;
+import crudsinterface.UsersCrudInterface;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import pojos.Projectsforusers;
 import pojos.Users;
 import seesioncreator.SessionCreation;
@@ -24,7 +26,13 @@ public class ProjectCrudImplementation implements ProjectCrudInterface {
 
     @Override
     public ArrayList<Projectsforusers> selectProjects(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         List <Projectsforusers> projects = new ArrayList<>();
+        Session session = SessionCreation.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Projectsforusers.class);
+        criteria.add(Restrictions.eq("users.userId", id));
+         criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
+        projects = criteria.list();
+        return (ArrayList<Projectsforusers>) projects;
     }
 
     @Override
@@ -78,14 +86,31 @@ public class ProjectCrudImplementation implements ProjectCrudInterface {
           List <Projectsforusers> projects = new ArrayList<>();
         Session session = SessionCreation.getSessionFactory().openSession();
          int n=2;
-         Criteria count = session.createCriteria(Projectsforusers.class);
+        Criteria count = session.createCriteria(Projectsforusers.class);
         count.setProjection(Projections.rowCount());
         Long total = (Long) count.uniqueResult();
         Criteria criteria = session.createCriteria(Projectsforusers.class);
         criteria.setFirstResult((int) (total-n));
+         criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
         criteria.setMaxResults(n);
         projects = criteria.list();
         return (ArrayList<Projectsforusers>) projects;
     }
 
+    @Override
+    public ArrayList<Projectsforusers> selectBestProjects() {
+         
+         UsersCrudInterface crud = new UsersCrudImplementation();
+         ArrayList<Users> usersAll= crud.selectMaxRateUsers();
+          List <Projectsforusers> projects = new ArrayList<>();
+           Session session = SessionCreation.getSessionFactory().openSession();
+       for(int i=0;i<usersAll.size();i++){
+         Criteria criteria = session.createCriteria(Projectsforusers.class);
+        criteria.add(Restrictions.eq("users.userId", usersAll.get(i).getUserId()));
+        projects.addAll(criteria.list()) ;    
+    }
+     return  (ArrayList<Projectsforusers>) projects;  
+    }
 }
+
+

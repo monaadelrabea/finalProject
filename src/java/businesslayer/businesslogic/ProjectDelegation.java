@@ -82,5 +82,20 @@ public class ProjectDelegation implements ProjectDelegationInt {
       projects =  pc.selectLastInterd();
         return projects;
     }
+    @Override
+   public ArrayList<Projectsforusers> selectProjects(int id){
+      ArrayList<Projectsforusers> projects =new ArrayList<>();
+         ProjectCrudInterface pc;
+        pc = new ProjectCrudImplementation();
+      projects =  pc.selectProjects(id);
+        return projects;   
+   }
 
+    @Override
+    public ArrayList<Projectsforusers> selectBestProjects() {
+ ArrayList<Projectsforusers> projects =new ArrayList<>();
+         ProjectCrudInterface pc;
+        pc = new ProjectCrudImplementation();
+      projects =  pc.selectBestProjects();
+        return projects;     }
 }

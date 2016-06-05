@@ -50,6 +50,13 @@ public class PorposaDelegation implements PorposaDelegationInt {
         crud.delete(id);
 
     }
+     @Override
+    public boolean delegateInsert(Porposa porposa) {
+
+        PorposaCrudInterface crud = new PorposaCrudImplementation();
+        return (crud.insert(porposa));
+
+    }
 
     @Override
     public boolean delegateInsert(String price, String startDate, String deadLine, String projectId, String SuplierId, String projectStatus) {

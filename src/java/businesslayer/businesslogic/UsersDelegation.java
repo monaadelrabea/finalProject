@@ -115,5 +115,11 @@ UsersCrudInterface crud = new UsersCrudImplementation();
         UsersCrudInterface crud = new UsersCrudImplementation();
         crud.delete(id);
     return true;}
+     @Override
+    public ArrayList<Users> selectMaxRateUsers() {
+         UsersCrudInterface crud = new UsersCrudImplementation();
+         ArrayList<Users> usersAll= crud.selectMaxRateUsers(); 
+         return  usersAll;
+    }
 
 }

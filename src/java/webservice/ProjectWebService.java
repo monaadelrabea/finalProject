@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONObject;
@@ -28,7 +29,7 @@ import pojos.Projectsforusers;
  */
 @Path("/project")
 public class ProjectWebService {
-
+public static  ArrayList<Projectsforusers> ProjectsForUser =new ArrayList<>();
     @POST
     @Path("/Project")
     public Response selectUser(MultivaluedMap<String, String> val) throws Exception {
@@ -50,16 +51,50 @@ public class ProjectWebService {
     }
      @GET
     @Path("/getLastProject")
-    public Response selectLastUser() throws Exception {
+    public Response selectLastProject(@QueryParam("footer") int footer) throws Exception {
         System.out.println("in web service mona");
         ProjectDelegationInt delegationInt = new ProjectDelegation();
-        ArrayList<Projectsforusers> categories=delegationInt.selectLastInterd();
+       ProjectsForUser=delegationInt.selectLastInterd();
+        ArrayList<Projectsforusers> portofolios =new ArrayList<>();
+     for(int i= footer; i<4 && i<ProjectsForUser.size() ;i++){
+     portofolios.add(ProjectsForUser.get(i));
+     }
+      Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();      
+     String out=g.toJson(portofolios);
+      Map<String, Object> map =new HashMap();
+      map.put("satatus", true);
+      map.put("projects",  portofolios);    
+     System.out.println(out);
+        return Response.status(200).entity(g.toJson(map)).build();
+    }
+     @GET
+    @Path("/getBestProject")
+    public Response selectBestProject() throws Exception {
+        System.out.println("in web service mona");
+        ProjectDelegationInt delegationInt = new ProjectDelegation();
+       ProjectsForUser=delegationInt.selectBestProjects();
+      Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();      
+     String out=g.toJson( ProjectsForUser);
+     Map<String, Object> map =new HashMap();
+      map.put("satatus", true);
+      map.put("bestProjects", ProjectsForUser);    
+     System.out.println(out);
+        return Response.status(200).entity(g.toJson(map)).build();
+    }
+    @POST
+    @Path("/projectsOfUser")
+     public Response selectAllProjectOfUser(MultivaluedMap<String, String> val) throws Exception {
+        System.out.println("in web service mona");
+        int id=Integer.parseInt(val.getFirst("uId"));
+        ProjectDelegationInt delegationInt = new ProjectDelegation();
+       ArrayList<Projectsforusers> categories=delegationInt.selectProjects(id);
       Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();      
      String out=g.toJson(categories);
       Map<String, Object> map =new HashMap();
       map.put("satatus", true);
-      map.put("projects", categories);    
+      map.put("projectsOfUser", categories);    
      System.out.println(out);
         return Response.status(200).entity(g.toJson(map)).build();
     }
+    
 }

@@ -53,7 +53,7 @@ public class CategoryWebServ{
      String message = "";
      CategoryDelegationInt cat=new CategoryDelegation();
        ArrayList<Category> categories=cat.selectCategorys();
-      Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();      
+      Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().serializeNulls().create();      
      String out=g.toJson(categories);
       Map<String, Object> map =new HashMap();
       map.put("satatus", true);
@@ -61,16 +61,5 @@ public class CategoryWebServ{
      System.out.println(out);
         return Response.status(200).entity(g.toJson(map)).build();
     }
-     @GET
-    @Path("/getCategoriesRandom")
-    public Response selectCategoryRandom() throws Exception {
-        String message = "";
-      CategoryDelegationInt cat=new CategoryDelegation();
-      ArrayList<Category> categories=cat.selectCategorysRondem();
-      Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-           String out = g.toJson(categories) ;
-           System.out.println(out);
-        return Response.status(200).entity(out).build();
-    }
-  
+    
 }

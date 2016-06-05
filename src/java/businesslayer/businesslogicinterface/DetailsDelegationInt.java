@@ -7,19 +7,25 @@ package businesslayer.businesslogicinterface;
 
 import java.util.ArrayList;
 import pojos.Details;
+import pojos.DetailsId;
 
 /**
  *
  * @author m@pc
  */
 public interface DetailsDelegationInt {
-     public ArrayList<Details> selectDetails(int pId, int PrId) ;
-      
-     public void delegateInsert(Details d);
+
+    public ArrayList<Details> selectDetails(int pId, int PrId);
+
+    public boolean delegateInsert(Details d);
+
+    public Details delegateSetRate(int userId, int projectId, int porposaId, int rate);
 
     public Details delegateSelect(int id);
 
     public void delegateUpdate(int id, Details d);
 
     public void delegateDelete(int id);
+
+    public Details delegateSetCommint(int userId, int projectId, int porposaId, String Comment);
 }

@@ -5,6 +5,7 @@
  */
 package businesslayer.businesslogicinterface;
 
+import java.util.ArrayList;
 import pojos.Users;
 
 /**
@@ -20,6 +21,9 @@ public interface UsersDelegationInt {
     public boolean delegateUpdate(int id, Users u);
 
     public boolean delegateDelete(int id);
+    
      public Users delegateSelectEP(String email, String password) ;
+     
+         public ArrayList<Users> selectMaxRateUsers();
 
 }
