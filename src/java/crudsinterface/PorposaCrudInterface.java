@@ -5,6 +5,7 @@
  */
 package crudsinterface;
 
+import java.util.ArrayList;
 import pojos.Porposa;
 
 /**
@@ -20,5 +21,7 @@ public interface PorposaCrudInterface {
     public boolean update(Integer id, Porposa porposa);
 
     public boolean delete(Integer id);
+    
+    public ArrayList<Object> projectsIds(int porId);
 
 }

@@ -34,6 +34,7 @@ public class Porposa implements java.io.Serializable {
     private int price;
     private Date startDatePor;
     private Date deadLinePor;
+    @Expose
     private String statusOfPorposa;
     private Set<Details> detailses = new HashSet<Details>(0);
 

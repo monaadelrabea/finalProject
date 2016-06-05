@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -111,6 +112,18 @@ public class ProjectCrudImplementation implements ProjectCrudInterface {
     }
      return  (ArrayList<Projectsforusers>) projects;  
     }
+    
+    
+    public ArrayList<Projectsforusers> projectsId(int porId){
+    List<Projectsforusers> pIds=new ArrayList<>();
+   Session sc = SessionCreation.getSessionFactory().openSession();
+      Query m=sc.createQuery("select * from projectsforusers where  projectsforusers.projectId =( select projectsforusers.projectId from Porposa where porpId=?)");
+       m.setInteger(0, porId);
+       pIds = m.list();
+        return (ArrayList<Projectsforusers>) pIds;   
+}
+    
+   
 }
 
 

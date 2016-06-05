@@ -14,6 +14,7 @@ import crudsinterface.PorposaCrudInterface;
 import crudsinterface.PortofolioforuserCrudInterface;
 import crudsinterface.ProjectCrudInterface;
 import crudsinterface.UsersCrudInterface;
+import java.util.ArrayList;
 import java.util.Date;
 import pojos.Porposa;
 import pojos.Projectsforusers;
@@ -80,5 +81,11 @@ public class PorposaDelegation implements PorposaDelegationInt {
         flag= cr.insert(p); 
   return flag;
     }
-
+      @Override
+public ArrayList<Object> projectsIds(int porId){
+  PorposaCrudInterface cr = new PorposaCrudImplementation();
+     ArrayList<Object> pIds=new ArrayList<>();
+     pIds=cr.projectsIds(porId);
+     return pIds;
+}
 }

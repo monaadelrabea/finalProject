@@ -5,7 +5,9 @@
  */
 package webservice;
 
+import businesslayer.businesslogic.PorposaDelegation;
 import businesslayer.businesslogic.ProjectDelegation;
+import businesslayer.businesslogicinterface.PorposaDelegationInt;
 import businesslayer.businesslogicinterface.ProjectDelegationInt;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -82,7 +84,7 @@ public static  ArrayList<Projectsforusers> ProjectsForUser =new ArrayList<>();
         return Response.status(200).entity(g.toJson(map)).build();
     }
     @POST
-    @Path("/projectsOfUser")
+    @Path("/projectsOfUserWork")
      public Response selectAllProjectOfUser(MultivaluedMap<String, String> val) throws Exception {
         System.out.println("in web service mona");
         int id=Integer.parseInt(val.getFirst("uId"));
@@ -92,7 +94,22 @@ public static  ArrayList<Projectsforusers> ProjectsForUser =new ArrayList<>();
      String out=g.toJson(categories);
       Map<String, Object> map =new HashMap();
       map.put("satatus", true);
-      map.put("projectsOfUser", categories);    
+      map.put("projectsOfUserWork", categories);    
+     System.out.println(out);
+        return Response.status(200).entity(g.toJson(map)).build();
+    }
+       @POST
+    @Path("/projectsOfUserHire")
+     public Response selectAllProjectOfUserHire(MultivaluedMap<String, String> val) throws Exception {
+        System.out.println("in web service mona");
+        int id=Integer.parseInt(val.getFirst("uId"));
+        PorposaDelegationInt delegationInt = new PorposaDelegation();
+       ArrayList<Object> categories=delegationInt.projectsIds(id);
+      Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();      
+     String out=g.toJson(categories);
+      Map<String, Object> map =new HashMap();
+      map.put("satatus", true);
+      map.put("projectsOfUserHire", categories);    
      System.out.println(out);
         return Response.status(200).entity(g.toJson(map)).build();
     }

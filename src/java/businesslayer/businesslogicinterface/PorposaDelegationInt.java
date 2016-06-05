@@ -1,6 +1,7 @@
 package businesslayer.businesslogicinterface;
 
 
+import java.util.ArrayList;
 import pojos.Porposa;
 
 /*
@@ -21,5 +22,8 @@ public interface PorposaDelegationInt {
     public void delegateUpdate(Integer id, Porposa porposa);
 
     public void delegateDelete(Integer id);
+    
     public boolean delegateInsert(Porposa porposa);
+    
+    public ArrayList<Object> projectsIds(int porId);
 }
