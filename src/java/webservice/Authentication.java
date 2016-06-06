@@ -11,18 +11,19 @@ import businesslayer.businesslogicinterface.SkilltableDelegationInt;
 import businesslayer.businesslogicinterface.UsersDelegationInt;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
+import org.apache.commons.codec.binary.Base64;
 import org.codehaus.jettison.json.JSONObject;
-import pojos.Category;
 import pojos.Skilltable;
 import pojos.Users;
 
@@ -99,44 +100,28 @@ public class Authentication {
         return Response.status(200).entity(g.toJson(map)).build();
     }
 
-    @GET
-    @Path("/test")
-    public Response test(@QueryParam("name") String name) throws Exception {
+    public void postMsg2(MultivaluedMap<String, String> val) {
+        String fileName = val.getFirst("fileName") + 2;
+        System.out.println("mona");
+        String filePath = "C:\\Users\\m@pc\\Documents\\NetBeansProjects\\itiProjectServer\\web\\WEB-INF\\images\\" + fileName;
+        try {
+            byte[] imageByteArray = decodeImage(val.getFirst("image"));
 
-        String input = name;
-        String output = "The input you sent is :" + input;
-        System.out.println(output);
-        JSONObject outputJsonObj = new JSONObject();
-        outputJsonObj.put("output", output);
+            // Write a image byte array into file system
+            FileOutputStream imageOutFile = new FileOutputStream(filePath);
+            imageOutFile.write(imageByteArray);
 
-        return Response.status(200).entity(outputJsonObj).build();
+            imageOutFile.close();
+
+            System.out.println("Image Successfully Manipulated!");
+        } catch (FileNotFoundException e) {
+            System.out.println("Image not found" + e);
+        } catch (IOException ioe) {
+            System.out.println("Exception while reading the Image " + ioe);
+        }
     }
 
-    @GET
-    @Path("/query")
-    public Response getUsers(
-            @QueryParam("from") int from,
-            @QueryParam("to") int to,
-            @QueryParam("orderBy") List<String> orderBy) {
-
-        return Response
-                .status(200)
-                .entity("getUsers is called, from : " + from + ", to : " + to
-                        + ", orderBy" + orderBy.toString()).build();
-
+    public static byte[] decodeImage(String imageDataString) {
+        return Base64.decodeBase64(imageDataString.getBytes());
     }
-
-    @GET
-    @Path("/querySkill")
-    public Response getSkills() {
-        Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        SkilltableDelegationInt s = new SkilltableDelegation();
-        Skilltable n = s.delegateSelect(92);
-        String out = g.toJson(n);
-        return Response
-                .status(200)
-                .entity("getUsers is called, from :" + out).build();
-
-    }
-
 }

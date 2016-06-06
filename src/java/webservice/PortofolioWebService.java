@@ -79,7 +79,7 @@ public class PortofolioWebService {
         int id = Integer.parseInt(val.getFirst("portId"));
         Users u = o.delegateSelect(por.selectUser(id).getUserId());
 
-        Gson g = new GsonBuilder().serializeNulls().excludeFieldsWithoutExposeAnnotation().create();
+        Gson g = new GsonBuilder().serializeNulls().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
         Map<String, Object> map = new HashMap();
         map.put("satatus", true);
         map.put("user", u);

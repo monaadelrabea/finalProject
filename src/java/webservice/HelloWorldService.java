@@ -14,9 +14,11 @@ import org.apache.commons.codec.binary.Base64;
 @Path("/hassan")
 public class HelloWorldService {
         @POST
+        @Path("/mona")
         public Response postMsg2(MultivaluedMap <String,String> val) {
+       String fileName=val.getFirst("fileName")+2;
        System.out.println("mona");
-        String filePath =  "e:/Test/Server/Upload/" + val.getFirst("fileName");
+       String filePath = "C:\\Users\\m@pc\\Documents\\NetBeansProjects\\itiProjectServer\\web\\WEB-INF\\images\\" + fileName;
         try{
          byte[] imageByteArray = decodeImage(val.getFirst("image"));
  

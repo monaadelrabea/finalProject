@@ -23,21 +23,20 @@ import pojos.Category;
  *
  * @author m@pc
  */
-
-
 @Path("/categoryURL")
 
-public class CategoryWebServ{
-  @GET
+public class CategoryWebServ {
+
+    @GET
     @Path("/insertCategory")
     public Response insertCategory(@QueryParam("categoryName") String categoryName, @QueryParam("imageOfCategoryUrl") String imageOfCategoryUrl) throws Exception {
 
         String message = "";
-     CategoryDelegationInt cat=new CategoryDelegation();
+        CategoryDelegationInt cat = new CategoryDelegation();
         if (cat.delegateInsert(categoryName, imageOfCategoryUrl)) {
-           message="true";
+            message = "true";
         } else {
-            message="false";
+            message = "false";
 
         }
 
@@ -46,20 +45,20 @@ public class CategoryWebServ{
 
         return Response.status(200).entity(outputJsonObj1).build();
     }
-    
+
     @GET
     @Path("/getCategories")
     public Response selectCategory() throws Exception {
-     String message = "";
-     CategoryDelegationInt cat=new CategoryDelegation();
-       ArrayList<Category> categories=cat.selectCategorys();
-      Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().serializeNulls().create();      
-     String out=g.toJson(categories);
-      Map<String, Object> map =new HashMap();
-      map.put("satatus", true);
-      map.put("categories", categories);    
-     System.out.println(out);
+        String message = "";
+        CategoryDelegationInt cat = new CategoryDelegation();
+        ArrayList<Category> categories = cat.selectCategorys();
+        Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().serializeNulls().create();
+        String out = g.toJson(categories);
+        Map<String, Object> map = new HashMap();
+        map.put("satatus", true);
+        map.put("categories", categories);
+        System.out.println(out);
         return Response.status(200).entity(g.toJson(map)).build();
     }
-    
+
 }
