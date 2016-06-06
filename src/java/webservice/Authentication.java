@@ -11,6 +11,7 @@ import businesslayer.businesslogicinterface.SkilltableDelegationInt;
 import businesslayer.businesslogicinterface.UsersDelegationInt;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONObject;
+import pojos.Category;
 import pojos.Skilltable;
 import pojos.Users;
 
@@ -30,6 +32,18 @@ import pojos.Users;
  */
 @Path("/authentication")
 public class Authentication {
+
+    @GET
+    @Path("/getSkills")
+    public Response getAllSkills() {
+        SkilltableDelegationInt s = new SkilltableDelegation();
+        Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().serializeNulls().create();
+        ArrayList<Skilltable> skills = s.selectSkills();
+        Map<String, Object> map = new HashMap();
+        map.put("satatus", true);
+        map.put("skills", skills);
+        return Response.status(200).entity(g.toJson(map)).build();
+    }
 
     @POST
     @Path("/register")

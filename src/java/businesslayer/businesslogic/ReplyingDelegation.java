@@ -6,9 +6,12 @@
 package businesslayer.businesslogic;
 
 import businesslayer.businesslogicinterface.ReplyingDelegationInt;
+import cruds.PostforprojectsCrudImplementation;
 import cruds.ReplyingCrudImplementation;
+import crudsinterface.PostforprojectsCrudInterface;
 import crudsinterface.ReplyingCrudInterface;
 import pojos.Comments;
+import pojos.Postforprojects;
 
 /**
  *
@@ -17,10 +20,13 @@ import pojos.Comments;
 public class ReplyingDelegation implements ReplyingDelegationInt {
 
     @Override
-    public void delegateInsert(Comments replying) {
-
-        ReplyingCrudInterface crud = new ReplyingCrudImplementation();
-        crud.insert(replying);
+    public boolean delegateInsert(String pId, String comment) {
+        int id = Integer.parseInt(pId);
+        ReplyingCrudInterface rCrud = new ReplyingCrudImplementation();
+        PostforprojectsCrudInterface crud = new PostforprojectsCrudImplementation();
+        Postforprojects p = crud.select(id);
+        Comments c = new Comments(p, comment);
+      return  rCrud.insert(c);
 
     }
 

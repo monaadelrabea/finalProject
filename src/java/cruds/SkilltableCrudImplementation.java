@@ -6,6 +6,9 @@
 package cruds;
 
 import crudsinterface.SkilltableCrudInterface;
+import java.util.ArrayList;
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import pojos.Skilltable;
@@ -94,5 +97,21 @@ boolean flag=true;
         }
 return flag;
     }
+  @Override
+    public ArrayList<Skilltable> selectSkills() {
+        List <Skilltable> skills = new ArrayList<>();
+ Session sc = SessionCreation.getSessionFactory().openSession();
 
+        try {
+            sc.beginTransaction();
+            Criteria cr = sc.createCriteria(Skilltable.class);
+           skills = cr.list();
+            sc.getTransaction().commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            sc.close();
+        }
+
+        return (ArrayList<Skilltable>) skills;    }
 }

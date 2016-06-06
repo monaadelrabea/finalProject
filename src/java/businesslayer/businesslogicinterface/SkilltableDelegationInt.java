@@ -5,6 +5,7 @@
  */
 package businesslayer.businesslogicinterface;
 
+import java.util.ArrayList;
 import pojos.Skilltable;
 import pojos.Users;
 
@@ -20,6 +21,8 @@ public interface SkilltableDelegationInt {
 
     public void delegateUpdate(Integer id, Skilltable skilltableF);
 
+     public ArrayList<Skilltable> selectSkills();
+     
     public void delegateDelete(Integer id);
 
 }

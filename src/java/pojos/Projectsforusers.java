@@ -42,6 +42,7 @@ public class Projectsforusers implements java.io.Serializable {
     private Set<Porposa> porposas = new HashSet<Porposa>(0);
     @Expose
     private Set<Projectsimages> projectsimageses = new HashSet<Projectsimages>(0);
+    @Expose
     private Set<Postforprojects> postforprojectses = new HashSet<Postforprojects>(0);
     private Set<Skilltable> skilltables = new HashSet<Skilltable>(0);
     @Expose

@@ -6,9 +6,13 @@
 package businesslayer.businesslogic;
 
 import businesslayer.businesslogicinterface.PostforprojectsDelegationInt;
+import businesslayer.businesslogicinterface.ProjectDelegationInt;
+import businesslayer.businesslogicinterface.UsersDelegationInt;
 import cruds.PostforprojectsCrudImplementation;
 import crudsinterface.PostforprojectsCrudInterface;
 import pojos.Postforprojects;
+import pojos.Projectsforusers;
+import pojos.Users;
 
 /**
  *
@@ -17,15 +21,25 @@ import pojos.Postforprojects;
 public class PostforprojectsDelegation implements PostforprojectsDelegationInt {
 
     @Override
-    public void delegateInsert(Postforprojects postforprojects) {
-
+    public boolean delegateInsert(String pId, String post, String uId) {
+        boolean flag=false;
+        int id1 = Integer.parseInt(uId);
+        int id2 = Integer.parseInt(pId);
+        UsersDelegationInt ud = new UsersDelegation();
+        ProjectDelegationInt delegationInt = new ProjectDelegation();
+        Projectsforusers p = delegationInt.delegateSelect(id2);
+        int id = Integer.parseInt(uId);
+        Users u = ud.delegateSelect(id);
+        Postforprojects q = new Postforprojects(p, u, post);
         PostforprojectsCrudInterface crud = new PostforprojectsCrudImplementation();
-        crud.insert(postforprojects);
-
+       if( crud.insert(q)){
+         flag=true;  
+       };
+return flag;
     }
 
     @Override
-    public Postforprojects delegateSelect(Integer id) {
+    public Postforprojects delegateSelect(int id) {
 
         PostforprojectsCrudInterface crud = new PostforprojectsCrudImplementation();
         return crud.select(id);

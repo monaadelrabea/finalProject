@@ -1,6 +1,7 @@
 package pojos;
 // Generated Jun 2, 2016 7:43:06 PM by Hibernate Tools 4.3.1
 
+import com.google.gson.annotations.Expose;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -21,11 +22,14 @@ import javax.persistence.Table;
 @Table(name = "postforprojects", catalog = "itiproject"
 )
 public class Postforprojects implements java.io.Serializable {
-
+@Expose
     private Integer qid;
     private Projectsforusers projectsforusers;
+    @Expose
     private Users users;
+    @Expose
     private String post;
+    @Expose
     private Set<Comments> commentses = new HashSet<Comments>(0);
 
     public Postforprojects() {

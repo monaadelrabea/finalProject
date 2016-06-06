@@ -5,6 +5,7 @@
  */
 package crudsinterface;
 
+import java.util.ArrayList;
 import pojos.Postforprojects;
 
 /**
@@ -20,5 +21,7 @@ public interface PostforprojectsCrudInterface {
     public boolean update(int id, Postforprojects postforprojects);
 
     public boolean delete(int id);
+    
+      public ArrayList<Object> projectsIds(int porId);
 
 }

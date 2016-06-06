@@ -38,11 +38,10 @@ public class UserWebService {
         //String out=g.toJson(user);
         Map<String, Object> map = new HashMap();
         map.put("satatus", true);
-        map.put("categories", u);
+        map.put("user", u);
         //System.out.println(out);
         return Response.status(200).entity(g.toJson(map)).build();
     }
-    
       @GET
     @Path("/getMaxUser")
     public Response selectMaxUser() throws Exception {

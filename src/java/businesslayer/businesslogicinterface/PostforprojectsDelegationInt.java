@@ -13,9 +13,9 @@ import pojos.Postforprojects;
  */
 public interface PostforprojectsDelegationInt {
 
-    public void delegateInsert(Postforprojects postforprojects);
+   public boolean delegateInsert(String pId,String post,String uId);
 
-    public Postforprojects delegateSelect(Integer id);
+    public Postforprojects delegateSelect(int id);
 
     public void delegateUpdate(Integer id, Postforprojects postforprojects);
 

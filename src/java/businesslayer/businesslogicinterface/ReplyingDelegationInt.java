@@ -13,7 +13,7 @@ import pojos.Comments;
  */
 public interface ReplyingDelegationInt {
 
-    public void delegateInsert(Comments replying);
+    public boolean delegateInsert(String pId,String comment);
 
     public Comments delegateSelect(Integer id);
 

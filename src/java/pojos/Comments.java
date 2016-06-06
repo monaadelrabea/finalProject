@@ -1,6 +1,7 @@
 package pojos;
 // Generated Jun 2, 2016 7:43:06 PM by Hibernate Tools 4.3.1
 
+import com.google.gson.annotations.Expose;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,8 +20,10 @@ import javax.persistence.Table;
 )
 public class Comments implements java.io.Serializable {
 
+    @Expose
     private Integer replyId;
     private Postforprojects postforprojects;
+    @Expose
     private String comment;
 
     public Comments() {

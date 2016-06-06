@@ -5,6 +5,7 @@
  */
 package crudsinterface;
 
+import java.util.ArrayList;
 import pojos.Skilltable;
 
 /**
@@ -21,4 +22,5 @@ public interface SkilltableCrudInterface {
 
     public boolean delete(Integer id);
 
+        public ArrayList<Skilltable> selectSkills() ;
 }

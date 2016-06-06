@@ -1,6 +1,7 @@
 package pojos;
 // Generated Jun 2, 2016 7:43:06 PM by Hibernate Tools 4.3.1
 
+import com.google.gson.annotations.Expose;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -22,8 +23,8 @@ import javax.persistence.Table;
 )
 public class Skilltable implements java.io.Serializable {
 
-    private Integer skillId;
-    private String skillName;
+ @Expose   private Integer skillId;
+ @Expose   private String skillName;
     private Set<Users> userses = new HashSet<Users>(0);
     private Set<Projectsforusers> projectsforuserses = new HashSet<Projectsforusers>(0);
 

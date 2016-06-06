@@ -60,7 +60,10 @@ public class ProjectDelegation implements ProjectDelegationInt {
 
     @Override
     public Projectsforusers delegateSelect(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+         ProjectCrudInterface uc;
+        uc = new ProjectCrudImplementation();
+      return  uc.selectProject(id);
     }
 
     @Override

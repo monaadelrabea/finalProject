@@ -6,7 +6,10 @@
 package cruds;
 
 import crudsinterface.PostforprojectsCrudInterface;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import pojos.Postforprojects;
 import seesioncreator.SessionCreation;
@@ -94,5 +97,14 @@ boolean flag =true;
         }
 return flag;
     }
-
+    
+@Override
+      public ArrayList<Object> projectsIds(int porId){
+    List<Object> pIds=new ArrayList<>();
+   Session sc = SessionCreation.getSessionFactory().openSession();
+      Query m=sc.createQuery("select por from Porposa por left join fetch por.projectsforusers where porpId=?)");
+       m.setInteger(0, porId);
+       pIds = m.list();
+        return (ArrayList<Object>) pIds;   
+}
 }

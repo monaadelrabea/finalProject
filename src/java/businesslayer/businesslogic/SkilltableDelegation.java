@@ -10,6 +10,7 @@ import crudsinterface.CrudInterface;
 import cruds.SkilltableCrudImplementation;
 import crudsinterface.SkilltableCrudInterface;
 import cruds.UsersCrudImplementation;
+import java.util.ArrayList;
 import pojos.Skilltable;
 
 /**
@@ -50,4 +51,10 @@ public class SkilltableDelegation implements SkilltableDelegationInt {
 
     }
 
+    @Override
+    public ArrayList<Skilltable> selectSkills() {
+  SkilltableCrudInterface crud = new SkilltableCrudImplementation();
+        return crud.selectSkills();    }
+
+    
 }

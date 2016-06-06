@@ -36,7 +36,8 @@ import pojos.Users;
 public class PortofolioWebService {
 
     public static ArrayList<Portofolioforuser> PortofoliosForUser = new ArrayList<>();
-    public static int checkDate = new Date().getDay();
+    //public static int checkDate = new Date().getDay();
+     public static int checkDate = 3;
     PortofolioforuserDelegationInt por = new PortofolioforuserDelegation();
     UsersDelegationInt o = new UsersDelegation();
     CategoryDelegationInt cat = new CategoryDelegation();
