@@ -86,5 +86,19 @@ public class PortofolioWebService {
 
         return Response.status(200).entity(g.toJson(map)).build();
     }
+   @POST
+    @Path("/insertPortofolio")
+    public Response InsertPortofolio(MultivaluedMap<String, String> val) throws Exception {
+        
+        String message = "";
+        int id = Integer.parseInt(val.getFirst("portId"));
+        Users u = o.delegateSelect(por.selectUser(id).getUserId());
 
+        Gson g = new GsonBuilder().serializeNulls().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
+        Map<String, Object> map = new HashMap();
+        map.put("satatus", true);
+        map.put("user", u);
+
+        return Response.status(200).entity(g.toJson(map)).build();
+    }
 }

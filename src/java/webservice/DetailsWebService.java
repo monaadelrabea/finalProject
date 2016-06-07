@@ -11,9 +11,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.HashMap;
 import java.util.Map;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import pojos.Details;
 
@@ -24,21 +24,30 @@ import pojos.Details;
 @Path("/details")
 public class DetailsWebService {
 
-    @GET
+    @POST
     @Path("/updateComment")
-    public Response updateComment(@QueryParam("userId") int userId, @QueryParam("projectId") int projectId, @QueryParam("porposaId") int porposaId, @QueryParam("Comment") String Comment) throws Exception {
+    public Response updateComment(MultivaluedMap<String, String> val) throws Exception {
+
         DetailsDelegationInt detailsDelegationInt = new DetailsDelegation();
-        Details details = detailsDelegationInt.delegateSetCommint(userId, projectId, porposaId, Comment);
+        int userId = Integer.parseInt(val.getFirst("userId"));
+        int projectId = Integer.parseInt(val.getFirst("projectId"));
+        int porposaId = Integer.parseInt(val.getFirst("porposaId"));
+        String comment = val.getFirst("Comment");
+        Details details = detailsDelegationInt.delegateSetCommint(userId, projectId, porposaId, comment);
         Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         Map<String, Object> map = new HashMap();
         map.put("satatus", details);
         return Response.status(200).entity(g.toJson(map)).build();
     }
-    
-    @GET
+
+    @POST
     @Path("/updateRate")
-    public Response updateRate(@QueryParam("userId") int userId, @QueryParam("projectId") int projectId, @QueryParam("porposaId") int porposaId, @QueryParam("rate") int rate) throws Exception {
+    public Response updateRate(MultivaluedMap<String, String> val) throws Exception {
         DetailsDelegationInt detailsDelegationInt = new DetailsDelegation();
+        int userId = Integer.parseInt(val.getFirst("userId"));
+        int projectId = Integer.parseInt(val.getFirst("projectId"));
+        int porposaId = Integer.parseInt(val.getFirst("porposaId"));
+        int rate = Integer.parseInt(val.getFirst("rate"));
         Details details = detailsDelegationInt.delegateSetRate(userId, projectId, porposaId, rate);
         Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         Map<String, Object> map = new HashMap();
