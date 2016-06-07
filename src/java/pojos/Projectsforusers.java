@@ -36,8 +36,11 @@ public class Projectsforusers implements java.io.Serializable {
     private String projectName;
     @Expose
     private String projectDescription;
+    @Expose
     private int budget;
+    @Expose
     private Date startDate;
+    @Expose
     private Date projectDeadLine;
     private Set<Porposa> porposas = new HashSet<Porposa>(0);
     @Expose
