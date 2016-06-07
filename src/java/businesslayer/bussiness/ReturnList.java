@@ -14,10 +14,12 @@ import crudsinterface.TagCrudInterface;
 import crudsinterface.TagsForProjectsInterface;
 import java.util.ArrayList;
 import java.util.List;
+import pojos.Category;
 import pojos.Phoneofuser;
 import pojos.Projectsforusers;
 import pojos.Projectsimages;
 import pojos.Skilltable;
+import pojos.Tags;
 import pojos.Tagsofprojects;
 
 /**
@@ -93,15 +95,15 @@ public class ReturnList {
         return ps;
     }
     
-    public List<Tagsofprojects> returnTagsAll(List<String> skk, Projectsforusers projectsforusers) {
-        List<Tagsofprojects> ps = new ArrayList<>();
+    public List<Tags> returnTagsAll(List<String> skk, Category cat) {
+        List<Tags> ps = new ArrayList<>();
         for (int i = 0; i < skk.size(); i++) {
-            Tagsofprojects p = new Tagsofprojects();
+            Tags p = new Tags();
             TagCrudInterface crudInterface = new TagCrudImplementation();
-            p.setTags(crudInterface.selectTag(skk.get(i)));
-            p.setProjectsforusers(projectsforusers);
-            TagsForProjectsInterface forProjectsInterface = new TagsForProjectsImplementation();
-            forProjectsInterface.insertTagsOfProjects(p);
+            p.setTagDescription(skk.get(i));
+            p.setCategory(cat);
+            TagCrudInterface forProjectsInterface = new TagCrudImplementation();
+            forProjectsInterface.insertTag(p);
             ps.add(p);
         }
         return ps;

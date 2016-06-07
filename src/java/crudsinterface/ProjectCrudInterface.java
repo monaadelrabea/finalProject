@@ -27,5 +27,7 @@ public interface ProjectCrudInterface {
     public ArrayList<Projectsforusers> selectLastInterd();
     
    public ArrayList<Projectsforusers> selectBestProjects();
+   
+     public ArrayList<Projectsforusers> selectAllProjects();
 
 }

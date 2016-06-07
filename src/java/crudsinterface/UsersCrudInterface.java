@@ -25,5 +25,9 @@ public interface UsersCrudInterface {
     public boolean delete(int id);
     
     public ArrayList<Users> selectMaxRateUsers();
+    
+    public ArrayList<Users> selectAllUsers();
+    
+    public ArrayList<Users> selectE(String email);
 
 }

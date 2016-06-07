@@ -37,7 +37,7 @@ public static  ArrayList<Projectsforusers> ProjectsForUser =new ArrayList<>();
     public Response selectUser(MultivaluedMap<String, String> val) throws Exception {
 
         ProjectDelegationInt delegationInt = new ProjectDelegation();
-        boolean flag = delegationInt.delegateInsert(val.getFirst("projectName"), val.getFirst("projectDescription"), Integer.parseInt(val.getFirst("budget")), Date.valueOf(val.getFirst("startDate")), Date.valueOf(val.getFirst("projectDeadLine")), val.getFirst("projectsimageses"), val.getFirst("skilltables"), val.getFirst("tagsofprojectses"), Integer.parseInt(val.getFirst("userId")), Integer.parseInt(val.getFirst("categoryId")));
+        boolean flag = delegationInt.delegateInsert(val.getFirst("projectName"), val.getFirst("projectDescription"), Integer.parseInt(val.getFirst("budget")), Date.valueOf(val.getFirst("startDate")), Date.valueOf(val.getFirst("projectDeadLine")), val.getFirst("name"),val.getFirst("content"), val.getFirst("skilltables"), val.getFirst("tagsofprojectses"), Integer.parseInt(val.getFirst("userId")), Integer.parseInt(val.getFirst("categoryId")));
         JSONObject outputJsonObj = new JSONObject();
         if (flag) {
 
@@ -114,4 +114,5 @@ public static  ArrayList<Projectsforusers> ProjectsForUser =new ArrayList<>();
         return Response.status(200).entity(g.toJson(map)).build();
     }
     
+     
 }

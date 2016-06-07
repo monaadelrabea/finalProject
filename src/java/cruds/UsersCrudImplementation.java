@@ -46,7 +46,7 @@ public class UsersCrudImplementation implements UsersCrudInterface {
     public Users selectEP(String email, String password) {
         Session sc = SessionCreation.getSessionFactory().openSession();
 
-        List users =new ArrayList();
+        List<Users> users =new ArrayList();
         try {
             sc.beginTransaction();
             Criteria cr = sc.createCriteria(Users.class);
@@ -59,9 +59,26 @@ public class UsersCrudImplementation implements UsersCrudInterface {
         } finally {
             sc.close();
         }
-        return ((Users) users.get(0));
+        return ( (Users)users.get(0));
     }
+   @Override
+    public ArrayList<Users>  selectE(String email) {
+        Session sc = SessionCreation.getSessionFactory().openSession();
 
+        List <Users>users =new ArrayList();
+        try {
+            sc.beginTransaction();
+            Criteria cr = sc.createCriteria(Users.class);
+            cr.add(Restrictions.eq("userEmail", email));
+            users = cr.list();
+            sc.getTransaction().commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            sc.close();
+        }
+        return (ArrayList<Users>) users;
+    }
     @Override
     public Users select(int id) {
 
@@ -136,7 +153,7 @@ System.out.println(maxRate.get(0));
      maxRateOfUsers=criteria.list();
     return (ArrayList<Users>) maxRateOfUsers;
     }
-    
+     @Override 
 public ArrayList<Users> selectAllUsers() {
         ArrayList<Users> maxRate= new ArrayList<>();
          Session session = SessionCreation.getSessionFactory().openSession();
@@ -167,6 +184,5 @@ public ArrayList<Integer> maxValue() {
          System.out.println(rate2);
     return users;
     }
-
 
 }

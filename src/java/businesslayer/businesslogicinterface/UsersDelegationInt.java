@@ -25,5 +25,9 @@ public interface UsersDelegationInt {
      public Users delegateSelectEP(String email, String password) ;
      
          public ArrayList<Users> selectMaxRateUsers();
+         
+         public int delegateSelectId(String email);
+         
+         public ArrayList<Users> selectAllUsers();
 
 }

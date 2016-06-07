@@ -48,7 +48,6 @@ public class ApplicationConfig extends Application {
         resources.add(webservice.Status.class);
         resources.add(webservice.TagsWebService.class);
         resources.add(webservice.UserWebService.class);
-        resources.add(webservice.upload.class);
     }
     
 }

@@ -114,7 +114,15 @@ public class ProjectCrudImplementation implements ProjectCrudInterface {
     }
     
     
- 
+  @Override
+    public ArrayList<Projectsforusers> selectAllProjects() {
+        Session session = SessionCreation.getSessionFactory().openSession();
+         List<Projectsforusers>  projects=new ArrayList<>();
+         Criteria criteria = session.createCriteria(Projectsforusers.class);
+        projects=criteria.list() ;    
+   
+     return  (ArrayList<Projectsforusers>) projects;  
+    }
     
    
 }

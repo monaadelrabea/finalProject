@@ -34,10 +34,19 @@ public class UsersDelegation implements UsersDelegationInt {
         return crud.select(id);
 
     }
+ @Override
+    public int delegateSelectId(String email) {
 
+        UsersCrudInterface crud = new UsersCrudImplementation();
+        Users u =crud.selectE(email).get(0);
+        return u.getUserId();
+
+    }
     @Override
     public boolean delegateInsert(String userEmail, String userImageUrl, String password, boolean gender, String userName, int ped, String country, String governorate, String city, String street, String summery, String profissionalTitle, String identifire, String mobile, String phones, String Skills) {
     UsersCrudInterface crud = new UsersCrudImplementation();
+    boolean out=false;
+    if(crud.selectE(userEmail).isEmpty()){
      ReturnList r=new ReturnList();
       SkilltableDelegationInt sd= new  SkilltableDelegation();
         PhoneofuserDelegation phd=new PhoneofuserDelegation();
@@ -73,13 +82,13 @@ public class UsersDelegation implements UsersDelegationInt {
         Set<Users> uSet=new HashSet(uList);
         user.setSkilltables(sss);
         System.out.println(user.getSkilltables());
-         boolean out;
+       
         if(ValidaionClass.insertNewUserValidate(userEmail, userImageUrl, password, gender, userName, ped, country, governorate, city, street, summery, profissionalTitle, identifire, mobile, phones, Skills)){
          out=crud.insert(user);  
         }else{
             out=false;
         }
-       
+    
         for(int i=0;i<stList.size();i++){
         stList.get(i).setUserses(uSet);
         sd.delegateInsert(stList.get(i));
@@ -90,7 +99,9 @@ public class UsersDelegation implements UsersDelegationInt {
           ph3.get(i).setUsers(user);
           phd.delegateInsert(ph3.get(i));
         }
-        
+    }else{
+        out=false;
+    } 
     return out;
     }
 
@@ -119,6 +130,12 @@ UsersCrudInterface crud = new UsersCrudImplementation();
     public ArrayList<Users> selectMaxRateUsers() {
          UsersCrudInterface crud = new UsersCrudImplementation();
          ArrayList<Users> usersAll= crud.selectMaxRateUsers(); 
+         return  usersAll;
+    }
+     @Override
+    public ArrayList<Users> selectAllUsers() {
+         UsersCrudInterface crud = new UsersCrudImplementation();
+         ArrayList<Users> usersAll= crud.selectAllUsers(); 
          return  usersAll;
     }
 

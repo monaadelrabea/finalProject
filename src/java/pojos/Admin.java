@@ -1,6 +1,7 @@
 package pojos;
 // Generated Jun 2, 2016 7:43:06 PM by Hibernate Tools 4.3.1
 
+import com.google.gson.annotations.Expose;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,10 +16,13 @@ import javax.persistence.Table;
 @Table(name = "admin", catalog = "itiproject"
 )
 public class Admin implements java.io.Serializable {
-
+@Expose
     private Integer adminId;
+@Expose
     private String adminUserName;
+@Expose
     private String adminPassword;
+@Expose
     private String adminToken;
 
     public Admin() {

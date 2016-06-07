@@ -15,7 +15,7 @@ import pojos.Projectsforusers;
  */
 public interface ProjectDelegationInt {
 
-    public boolean delegateInsert(String projectName, String projectDescription, int budget, Date startDate, Date projectDeadLine, String projectsimageses, String skilltables, String tagsofprojectses, int userId, int categoryid);
+    public boolean delegateInsert(String projectName, String projectDescription, int budget, Date startDate, Date projectDeadLine, String projectsimageses,String content, String skilltables, String tagsofprojectses, int userId, int categoryid) ;
 
     public Projectsforusers delegateSelect(int id);
 
@@ -28,4 +28,6 @@ public interface ProjectDelegationInt {
     public ArrayList<Projectsforusers> selectLastInterd();
     
     public ArrayList<Projectsforusers> selectBestProjects();
+    
+     public ArrayList<Projectsforusers> selectAllProjects();
 }
