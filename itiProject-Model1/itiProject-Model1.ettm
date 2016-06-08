@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TypeManagement projectID="DCE.19C438E0-36E7-575E-555A-285CE3821F7B">
+	<Locations nextID="1">
+	<Location locID="T.0" href=".\itiProject-Model1.etup"/></Locations>
+
+   <Types>
+   <Type id="DCE.76F3E9B7-D8BA-C091-03E1-AF6242D5CF4D" location="T.0" name="Unnamed"/></Types>
+
+	<IrresolvableTypes>
+	</IrresolvableTypes>
+
+</TypeManagement>

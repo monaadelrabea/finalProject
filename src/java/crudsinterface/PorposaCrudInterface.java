@@ -23,5 +23,7 @@ public interface PorposaCrudInterface {
     public boolean delete(Integer id);
     
     public ArrayList<Object> projectsIds(int porId);
+    
+      public ArrayList<Porposa> selectPorposeHQL(int id);
 
 }

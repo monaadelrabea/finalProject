@@ -6,7 +6,7 @@
 package businesslayer.businesslogic;
 
 import businesslayer.businesslogicinterface.PortofolioiamgesDelegationInt;
-import cruds.PortofolioiamgesCrudImplementation;
+import cruds.ImagesPortofolioCrudImplementation;
 import crudsinterface.PortofolioiamgesCrudInterface;
 import pojos.Portofolioimages;
 
@@ -19,15 +19,15 @@ public class PortofolioiamgesDelegation implements PortofolioiamgesDelegationInt
     @Override
     public void delegateInsert(Portofolioimages p) {
 
-        PortofolioiamgesCrudInterface crud = new PortofolioiamgesCrudImplementation();
-        crud.insert(p);
+        PortofolioiamgesCrudInterface crud = new ImagesPortofolioCrudImplementation();
+        crud.insertImagePortofolio(p);
 
     }
 
     @Override
     public Portofolioimages delegateSelect(Integer id) {
 
-        PortofolioiamgesCrudInterface crud = new PortofolioiamgesCrudImplementation();
+        PortofolioiamgesCrudInterface crud = new ImagesPortofolioCrudImplementation();
         return crud.select(id);
 
     }
@@ -35,7 +35,7 @@ public class PortofolioiamgesDelegation implements PortofolioiamgesDelegationInt
     @Override
     public void delegateUpdate(Integer id, Portofolioimages p) {
 
-        PortofolioiamgesCrudInterface crud = new PortofolioiamgesCrudImplementation();
+        PortofolioiamgesCrudInterface crud = new ImagesPortofolioCrudImplementation();
         crud.update(id, p);
 
     }
@@ -43,7 +43,7 @@ public class PortofolioiamgesDelegation implements PortofolioiamgesDelegationInt
     @Override
     public void delegateDelete(Integer id) {
 
-        PortofolioiamgesCrudInterface crud = new PortofolioiamgesCrudImplementation();
+        PortofolioiamgesCrudInterface crud = new ImagesPortofolioCrudImplementation();
         crud.delete(id);
 
     }

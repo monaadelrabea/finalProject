@@ -5,6 +5,7 @@
  */
 package crudsinterface;
 
+import java.util.ArrayList;
 import pojos.Portofolioimages;
 
 /**
@@ -12,8 +13,9 @@ import pojos.Portofolioimages;
  * @author hassan
  */
 public interface PortofolioiamgesCrudInterface {
-    
-    public boolean insert(Portofolioimages p);
+      public ArrayList<Portofolioimages> selectProjectsimages();
+      
+    public boolean insertImagePortofolio(Portofolioimages img);
 
     public Portofolioimages select(int id);
 

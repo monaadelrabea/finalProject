@@ -9,11 +9,19 @@ import businesslayer.businesslogic.PorposaDelegation;
 import businesslayer.businesslogic.UsersDelegation;
 import businesslayer.businesslogicinterface.PorposaDelegationInt;
 import businesslayer.businesslogicinterface.UsersDelegationInt;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONObject;
+import pojos.Porposa;
 
 /**
  *
@@ -40,6 +48,18 @@ public class PorposerWebService {
             outputJsonObj1.put("output", "there is some empty data please inter it");
         }
         return Response.status(200).entity(outputJsonObj1).build();
+    }
+    
+     @GET
+    @Path("/getProjectById")
+    public Response projectById(@QueryParam("projectId") int projectId) throws Exception {
+        PorposaDelegationInt porposaDelegationInt = new PorposaDelegation();
+        ArrayList<Porposa> porposa = porposaDelegationInt.delegateSelectPorposaHQL(projectId);
+        Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().serializeNulls().create();
+        Map<String, Object> map = new HashMap();
+        map.put("satatus", true);
+        map.put("projectPorposa", porposa);
+        return Response.status(200).entity(g.toJson(map)).build();
     }
 
    

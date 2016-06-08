@@ -29,5 +29,7 @@ public interface UsersCrudInterface {
     public ArrayList<Users> selectAllUsers();
     
     public ArrayList<Users> selectE(String email);
+    
+    public Object selectUserHQL(int id);
 
 }

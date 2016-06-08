@@ -8,6 +8,7 @@ package crudsinterface;
 import java.util.ArrayList;
 import pojos.Category;
 import pojos.Portofolioforuser;
+import pojos.Portofolioimages;
 import pojos.Users;
 
 /**
@@ -15,6 +16,7 @@ import pojos.Users;
  * @author hassan
  */
 public interface PortofolioforuserCrudInterface {
+  
     
     public boolean insert(Portofolioforuser portofolioforuser);
 

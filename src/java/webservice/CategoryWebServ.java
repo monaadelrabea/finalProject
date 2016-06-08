@@ -18,6 +18,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONObject;
 import pojos.Category;
+import pojos.Skilltable;
 
 /**
  *
@@ -39,11 +40,12 @@ public class CategoryWebServ {
             message = "false";
 
         }
-
-        JSONObject outputJsonObj1 = new JSONObject();
-        outputJsonObj1.put("message", message);
-
-        return Response.status(200).entity(outputJsonObj1).build();
+ Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().serializeNulls().create();
+        Map<String, Object> map = new HashMap();
+        map.put("satatus", true);
+        map.put("message", message);
+        return Response.status(200).entity(g.toJson(map)).build();
+      
     }
 
     @GET

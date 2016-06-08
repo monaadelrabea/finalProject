@@ -91,13 +91,16 @@ public class PortofolioWebService {
     public Response InsertPortofolio(MultivaluedMap<String, String> val) throws Exception {
         
         String message = "";
-        int id = Integer.parseInt(val.getFirst("portId"));
-        Users u = o.delegateSelect(por.selectUser(id).getUserId());
-
+        String portDescription =val.getFirst("description");
+        int uId =Integer.parseInt(val.getFirst("uId"));
+        int cId = Integer.parseInt(val.getFirst("cId"));
+        String names =val.getFirst("name");
+         String contents =val.getFirst("content");
+      boolean output= por.delegateInsert(uId,cId,names,contents,portDescription);
         Gson g = new GsonBuilder().serializeNulls().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
         Map<String, Object> map = new HashMap();
         map.put("satatus", true);
-        map.put("user", u);
+        map.put("user", "inserted succesfuly");
 
         return Response.status(200).entity(g.toJson(map)).build();
     }

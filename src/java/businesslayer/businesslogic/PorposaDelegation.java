@@ -88,4 +88,11 @@ public ArrayList<Object> projectsIds(int porId){
      pIds=cr.projectsIds(porId);
      return pIds;
 }
+ @Override
+    public ArrayList<Porposa> delegateSelectPorposaHQL(int id) {
+
+        PorposaCrudInterface crud = new PorposaCrudImplementation();
+        return crud.selectPorposeHQL(id);
+
+    }
 }

@@ -12,6 +12,7 @@ import businesslayer.businesslogicinterface.TagsForProjectDelegationInt;
 import businesslayer.businesslogicinterface.UsersDelegationInt;
 import businesslayer.bussiness.ReturnList;
 import cruds.ImagesPortofolioCrudImplementation;
+import cruds.ImagesProjectCrudImplementation;
 import cruds.ProjectCrudImplementation;
 import crudsinterface.ImagesProjectCrudInterface;
 import crudsinterface.ProjectCrudInterface;
@@ -79,7 +80,7 @@ public class ProjectDelegation implements ProjectDelegationInt {
              tp.setProjectsforusers(p);
              forProjectDelegationInterface.delegateInsert(tp);
             } 
-              ImagesProjectCrudInterface tp = new ImagesPortofolioCrudImplementation();
+              ImagesProjectCrudInterface tp = new ImagesProjectCrudImplementation();
               for(int i=0;i<imgList1.size();i++){
            Projectsimages  pImag=new Projectsimages();
               pImag.setImageUrl(imgList1.get(i));

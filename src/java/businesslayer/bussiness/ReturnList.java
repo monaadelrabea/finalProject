@@ -7,9 +7,11 @@ package businesslayer.bussiness;
 
 import businesslayer.businesslogic.SkilltableDelegation;
 import cruds.ImagesPortofolioCrudImplementation;
+import cruds.ImagesProjectCrudImplementation;
 import cruds.TagCrudImplementation;
 import cruds.TagsForProjectsImplementation;
 import crudsinterface.ImagesProjectCrudInterface;
+import crudsinterface.PortofolioiamgesCrudInterface;
 import crudsinterface.TagCrudInterface;
 import crudsinterface.TagsForProjectsInterface;
 import java.util.ArrayList;
@@ -88,7 +90,7 @@ public class ReturnList {
         for (int i = 0; i < skk.size(); i++) {
             Projectsimages p = new Projectsimages();
             p.setImageUrl(skk.get(i));
-            ImagesProjectCrudInterface crudInterface = new ImagesPortofolioCrudImplementation();
+           ImagesProjectCrudInterface crudInterface = new ImagesProjectCrudImplementation();
             crudInterface.insertImageProject(p);
             ps.add(p);
         }

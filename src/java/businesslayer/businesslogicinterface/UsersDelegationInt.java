@@ -28,6 +28,8 @@ public interface UsersDelegationInt {
          
          public int delegateSelectId(String email);
          
+          public Object delegateSelectUserHQL(int id) ;
+         
          public ArrayList<Users> selectAllUsers();
 
 }

@@ -64,6 +64,7 @@ public class UsersDelegation implements UsersDelegationInt {
         user.setSummery(summery);
         user.setProfessinalTiltle(profissionalTitle);
         user.setIdentefire(identifire);
+        user.setRate(0);
         /////////////////////////////////////////////////////////////////mobiles
         List<String> mobiles = Arrays.asList(mobile.split(","));
         List<Phoneofuser> ph1= r.returnMobiles(mobiles);
@@ -137,6 +138,16 @@ UsersCrudInterface crud = new UsersCrudImplementation();
          UsersCrudInterface crud = new UsersCrudImplementation();
          ArrayList<Users> usersAll= crud.selectAllUsers(); 
          return  usersAll;
+    }
+    
+    
+    
+    @Override
+    public Object delegateSelectUserHQL(int id) {
+
+        UsersCrudInterface crud = new UsersCrudImplementation();
+        return crud.selectUserHQL(id);
+
     }
 
 }

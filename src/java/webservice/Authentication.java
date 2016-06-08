@@ -84,7 +84,7 @@ public static int i=0;
            //  int id =ud.delegateSelectId(userEmail);
             // postMsg2(userImageUrl,image);
             System.out.println(output);
-            outputJsonObj1.put("output", "tureInsert");
+            outputJsonObj1.put("output", "ture Insert");
         } else {
             outputJsonObj1.put("output", "Try Another  Email please");
         }
@@ -108,7 +108,9 @@ public static int i=0;
     public String postMsg2(String file,String image) {
         String fileName = file;
         System.out.println(image);
-        String filePath = "C:\\Users\\m@pc\\Documents\\NetBeansProjects\\itiProjectServer\\web\\image\\User\\" + (i++)+fileName;
+      i=i++;
+      String filePath = "C:\\Users\\m@pc\\Documents\\NetBeansProjects\\itiProjectServer\\web\\image\\User\\" + (i++)+fileName;
+       String path="http://localhost:8084/itiProject/image/user/"+(i)+fileName;
         try {
             byte[] imageByteArray = decodeImage(image);
 
@@ -124,7 +126,7 @@ public static int i=0;
         } catch (IOException ioe) {
             System.out.println("Exception while reading the Image " + ioe);
         }
-        return filePath;
+        return path;
     }
 
     public static byte[] decodeImage(String imageDataString) {

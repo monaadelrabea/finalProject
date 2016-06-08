@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -60,6 +61,17 @@ public class UsersCrudImplementation implements UsersCrudInterface {
             sc.close();
         }
         return ( (Users)users.get(0));
+    }
+    
+      @Override
+    public Object selectUserHQL(int id) {
+
+        Session sc = SessionCreation.getSessionFactory().openSession();
+        Query query = sc.createQuery("select pro from Projectsforusers pro left join fetch pro.users where projectId=?");
+        query.setInteger(0, id);
+        Object users = query.list().get(0);
+        return users;
+
     }
    @Override
     public ArrayList<Users>  selectE(String email) {

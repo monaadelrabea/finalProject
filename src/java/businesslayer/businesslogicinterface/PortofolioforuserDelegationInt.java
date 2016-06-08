@@ -16,7 +16,7 @@ import pojos.Users;
  */
 public interface PortofolioforuserDelegationInt {
 
-    public void delegateInsert(Portofolioforuser portofolioforuser);
+   public boolean delegateInsert(int uId,int cId,String names,String contents,String portDescription);
 
     public Portofolioforuser delegateSelect(Integer id);
 

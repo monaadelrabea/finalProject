@@ -57,4 +57,16 @@ public class UserWebService {
         //System.out.println(out);
         return Response.status(200).entity(g.toJson(map)).build();
     }
+    
+    @GET
+    @Path("/getProjectById")
+    public Response projectById(@QueryParam("projectId") int projectId) throws Exception {
+        UsersDelegationInt usersDelegationInt = new UsersDelegation();
+        Object users = usersDelegationInt.delegateSelectUserHQL(projectId);
+        Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().serializeNulls().create();
+        Map<String, Object> map = new HashMap();
+        map.put("satatus", true);
+        map.put("projectUser", users);
+        return Response.status(200).entity(g.toJson(map)).build();
+    }
 }

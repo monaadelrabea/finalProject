@@ -26,4 +26,6 @@ public interface PorposaDelegationInt {
     public boolean delegateInsert(Porposa porposa);
     
     public ArrayList<Object> projectsIds(int porId);
+    
+    public ArrayList<Porposa> delegateSelectPorposaHQL(int id);
 }

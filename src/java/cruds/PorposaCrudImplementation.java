@@ -9,11 +9,14 @@ import crudsinterface.PorposaCrudInterface;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import pojos.Porposa;
 import pojos.Projectsforusers;
+import pojos.Users;
 import seesioncreator.SessionCreation;
 
 /**
@@ -40,7 +43,27 @@ boolean flag=true;
         }
 return flag;
     }
+@Override
+    public ArrayList<Porposa> selectPorposeHQL(int id) {
 
+        Session sc = SessionCreation.getSessionFactory().openSession();
+        ArrayList<Porposa> porposas = new ArrayList<>();
+
+        try {
+            sc.beginTransaction();
+            Criteria cr = sc.createCriteria(Users.class);
+            cr.add(Restrictions.eq("projectsforusers.projectId", id));
+            porposas = (ArrayList<Porposa>) cr.list();
+            sc.getTransaction().commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            sc.close();
+        }
+
+        return porposas;
+
+    }
     @Override
     public Porposa select(Integer id) {
 
