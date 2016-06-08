@@ -164,7 +164,7 @@ public class ProjectDelegation implements ProjectDelegationInt {
         } catch (IOException ioe) {
             System.out.println("Exception while reading the Image " + ioe);
         }
-        return filePath;
+        return file;
     }
 
     public static byte[] decodeImage(String imageDataString) {

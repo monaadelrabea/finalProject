@@ -142,7 +142,7 @@ public String postMsg2(String file,String image) {
         } catch (IOException ioe) {
             System.out.println("Exception while reading the Image " + ioe);
         }
-        return filePath;
+        return file;
     }
 
     public static byte[] decodeImage(String imageDataString) {

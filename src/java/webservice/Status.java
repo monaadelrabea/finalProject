@@ -51,5 +51,25 @@ public class Status {
         map.put("satatus", test);
         return Response.status(200).entity(g.toJson(map)).build();
     }
-    
+     @GET
+    @Path("/updateRefuseStatus")
+    public Response refuseUser(@QueryParam("porposa") int porposa, @QueryParam("project") int project) throws Exception {
+        PorposaDelegationInt delegationInt = new PorposaDelegation();
+        Porposa porposa1 = delegationInt.delegateSelect(porposa);
+        porposa1.setStatusOfPorposa("acceptance");
+        DetailsDelegationInt delegationInt1 = new DetailsDelegation();
+        ProjectDelegationInt delegationInt2 = new ProjectDelegation();
+        Details details = new Details();
+       DetailsId dId = new DetailsId(porposa,project);
+       details.setId(dId);
+        details.setPorposa(porposa1);
+        details.setProjectsforusers(delegationInt2.delegateSelect(project));
+        details.setStatusOfProjects("running");
+        boolean test = delegationInt1.delegateInsert(details);
+        boolean b = delegationInt.delegateInsert(porposa1);
+        Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        Map<String, Object> map = new HashMap();
+        map.put("satatus", test);
+        return Response.status(200).entity(g.toJson(map)).build();
+    }
 }
