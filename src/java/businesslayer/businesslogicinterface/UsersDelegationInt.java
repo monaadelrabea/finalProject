@@ -16,6 +16,8 @@ public interface UsersDelegationInt {
 
     public boolean delegateInsert(String userEmail,String userImageUrl,String password,boolean gen, String userName,int ped, String country,String governorate,String city,String street,String summery,String profissionalTitle, String identifire, String mobile, String phones,String Skills);
 
+      public boolean delegateUpdateUser(int id ,String userEmail, String userImageUrl, String password, boolean gender, String userName, int ped, String country, String governorate, String city, String street, String summery, String profissionalTitle, String identifire, String mobile, String phones, String Skills);
+      
     public Users delegateSelect(int id);
 
     public boolean delegateUpdate(int id, Users u);
