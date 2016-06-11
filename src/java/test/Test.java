@@ -5,13 +5,13 @@
  */
 package test;
 
-import businesslayer.businesslogic.PhoneofuserDelegation;
-import businesslayer.businesslogic.SkilltableDelegation;
-import businesslayer.businesslogicinterface.PhoneofuserDelegationInt;
-import businesslayer.businesslogic.UsersDelegation;
-import businesslayer.businesslogicinterface.SkilltableDelegationInt;
-import businesslayer.businesslogicinterface.UsersDelegationInt;
-import businesslayer.bussiness.ReturnList;
+import businesslogic.PhoneofuserDelegation;
+import businesslogic.SkilltableDelegation;
+import businesslogicinterface.PhoneofuserDelegationInt;
+import businesslogic.UsersDelegation;
+import businesslogicinterface.SkilltableDelegationInt;
+import businesslogicinterface.UsersDelegationInt;
+import bussinessList.ReturnList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import cruds.ProjectCrudImplementation;

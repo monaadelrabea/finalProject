@@ -5,10 +5,10 @@
  */
 package webservice;
 
-import businesslayer.businesslogic.CategoryDelegation;
-import businesslayer.businesslogic.UsersDelegation;
-import businesslayer.businesslogicinterface.CategoryDelegationInt;
-import businesslayer.businesslogicinterface.UsersDelegationInt;
+import businesslogic.CategoryDelegation;
+import businesslogic.UsersDelegation;
+import businesslogicinterface.CategoryDelegationInt;
+import businesslogicinterface.UsersDelegationInt;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.File;
@@ -40,7 +40,7 @@ public class UserWebService {
 
     @GET
     @Path("/getUser")
-    public Response selectUser(@QueryParam("userId") int userId) throws Exception {
+    public Response selectUser(@QueryParam("uId") int userId) throws Exception {
         String message = "";
         UsersDelegationInt user = new UsersDelegation();
         Users u = user.delegateSelect(userId);
@@ -79,22 +79,39 @@ public class UserWebService {
         map.put("projectUser", users);
         return Response.status(200).entity(g.toJson(map)).build();
     }
+     
+    @POST
+    @Path("/deleteUser")
+    public Response projectById(MultivaluedMap<String,String> val) throws Exception {
+        int id = Integer.parseInt(val.getFirst("uId"));
+        UsersDelegationInt usersDelegationInt = new UsersDelegation();
+        boolean d = usersDelegationInt.delegateDelete(id);
+        Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().serializeNulls().create();
+        Map<String, Object> map = new HashMap();
+        if(d==true){
+             map.put("satatus", true);
+        map.put("message","deleted succesfuly");
+        }else{
+           map.put("satatus", false);
+        map.put("message", "error in delete");  
+        }
+
+        return Response.status(200).entity(g.toJson(map)).build();
+    }
     
       @POST
     @Path("/updateUser")
     public Response register(MultivaluedMap<String, String> val) throws Exception {
 
         UsersDelegation ud = new UsersDelegation();
-        int id =Integer.parseInt(val.getFirst("userId"));
+        int id =Integer.parseInt(val.getFirst("uId"));
         String userEmail = val.getFirst("userEmail");;
-//      String userImageUrl = val.getFirst("name");
-//      String image = val.getFirst("content");
-        String userImageUrl = "1.png";
-        String image = photo();
-        String password = val.getFirst("password");
+     String image = val.getFirst("content");
+        String userImageUrl = val.getFirst("name");
+        
         boolean gender = Boolean.parseBoolean(val.getFirst("gender"));
         String userName = val.getFirst("userName");
-        int ped = Integer.parseInt("0");
+        int ped = Integer.parseInt("5");
         String country = val.getFirst("country");
         String governorate = val.getFirst("governorate");
         String city = val.getFirst("ciry");
@@ -107,9 +124,8 @@ public class UserWebService {
         //////////////////////////////////////////////////////////////////phones
         String phones = val.getFirst("phones");
         //////////////////////////////////////////////////////////////////Skills
-        String Skills = val.getFirst("skill");
         String imagePath= postMsg2(userImageUrl,image);
-        Boolean output = ud.delegateUpdateUser(id,userEmail,imagePath, password, gender, userName, ped, country, governorate, city, street, summery, profissionalTitle, identifire, mobile, phones, Skills);
+        Boolean output = ud.delegateUpdateUser(id,userEmail,imagePath,gender, userName, governorate, city, street, summery, profissionalTitle, identifire, mobile, phones);
         JSONObject outputJsonObj1 = new JSONObject();
         System.out.println(output);
         if (output == true) {
@@ -118,7 +134,7 @@ public class UserWebService {
             System.out.println(output);
             outputJsonObj1.put("output", "ture Insert");
         } else {
-            outputJsonObj1.put("output", "Try Another  Email please");
+            outputJsonObj1.put("output", "هناك بعض الداتا الفرغةتأكد من اؤسال جميع الداتا ");
         }
         return Response.status(200).entity(outputJsonObj1).build();
     }
@@ -128,8 +144,8 @@ public class UserWebService {
         String fileName = file;
         System.out.println(image);
       i=i++;
-      String filePath = "C:\\Users\\m@pc\\Documents\\NetBeansProjects\\itiProjectServer\\web\\image\\User\\" + (i++)+fileName;
-       String path="http://localhost:8084/itiProject/image/user/"+(i)+fileName;
+       String filePath = "C:\\Users\\m@pc\\Documents\\NetBeansProjects\\itiProjectServer\\web\\images\\user\\" + (i++) + fileName;
+        String path = "/images/user/" + (i) + fileName;
         try {
             byte[] imageByteArray = decodeImage(image);
 
@@ -149,6 +165,7 @@ public class UserWebService {
     }
 
     public static byte[] decodeImage(String imageDataString) {
+        String s =imageDataString.replaceAll(" ", "+");
         return Base64.decodeBase64(imageDataString.getBytes());
     }
     

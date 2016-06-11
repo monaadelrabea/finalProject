@@ -17,6 +17,10 @@ import seesioncreator.SessionCreation;
  * @author m@pc
  */
 public class ImagesProjectCrudImplementation  implements ImagesProjectCrudInterface{
+    Session sc;
+    public ImagesProjectCrudImplementation  (){
+         sc = SessionCreation.getSessionFactory().openSession();
+    }
     @Override
     public ArrayList<Projectsimages> selectProjectsimages() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -30,17 +34,16 @@ public class ImagesProjectCrudImplementation  implements ImagesProjectCrudInterf
     @Override
     public boolean insertImageProject(Projectsimages img) {
         boolean flag=true;
-      Session se = SessionCreation.getSessionFactory().openSession();
         try{
-       se.getTransaction().begin();
-       se.saveOrUpdate(img);
-       se.getTransaction().commit();
+       sc.getTransaction().begin();
+       sc.saveOrUpdate(img);
+       sc.getTransaction().commit();
         }catch(HibernateException ex){
-            se.getTransaction().rollback();
+            sc.getTransaction().rollback();
             ex.printStackTrace();
             flag=false;
         }finally{
-            se.close();
+            sc.close();
         }
         return flag;
     }

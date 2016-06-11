@@ -25,5 +25,7 @@ public interface PorposaCrudInterface {
     public ArrayList<Object> projectsIds(int porId);
     
       public ArrayList<Porposa> selectPorposeHQL(int id);
+      
+      public Object user(int porId);
 
 }

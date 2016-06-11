@@ -20,11 +20,15 @@ import seesioncreator.SessionCreation;
  */
 public class PostforprojectsCrudImplementation implements PostforprojectsCrudInterface {
 
+    Session sc;
+
+    public PostforprojectsCrudImplementation() {
+        sc = SessionCreation.getSessionFactory().openSession();
+    }
+
     @Override
     public boolean insert(Postforprojects postforprojects) {
-boolean flag=true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
-
+        boolean flag = true;
         try {
             sc.beginTransaction();
             sc.saveOrUpdate(postforprojects);
@@ -32,17 +36,16 @@ boolean flag=true;
         } catch (HibernateException e) {
             sc.getTransaction().rollback();
             e.printStackTrace();
-            flag=false;
+            flag = false;
         } finally {
             sc.close();
         }
-return flag;
+        return flag;
     }
 
     @Override
     public Postforprojects select(int id) {
 
-        Session sc = SessionCreation.getSessionFactory().openSession();
         Postforprojects postforprojects = new Postforprojects();
 
         try {
@@ -61,8 +64,7 @@ return flag;
 
     @Override
     public boolean update(int id, Postforprojects postforprojects) {
-boolean flag=true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
+        boolean flag = true;
 
         try {
             sc.beginTransaction();
@@ -72,17 +74,16 @@ boolean flag=true;
             sc.getTransaction().commit();
         } catch (HibernateException e) {
             e.printStackTrace();
-            flag=false;
+            flag = false;
         } finally {
             sc.close();
         }
-return flag;
+        return flag;
     }
 
     @Override
     public boolean delete(int id) {
-boolean flag =true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
+        boolean flag = true;
 
         try {
             sc.beginTransaction();
@@ -91,20 +92,20 @@ boolean flag =true;
             sc.getTransaction().commit();
         } catch (HibernateException e) {
             e.printStackTrace();
-            flag=false;
+            flag = false;
         } finally {
             sc.close();
         }
-return flag;
+        return flag;
     }
-    
-@Override
-      public ArrayList<Object> projectsIds(int porId){
-    List<Object> pIds=new ArrayList<>();
-   Session sc = SessionCreation.getSessionFactory().openSession();
-      Query m=sc.createQuery("select por from Porposa por left join fetch por.projectsforusers where porpId=?)");
-       m.setInteger(0, porId);
-       pIds = m.list();
-        return (ArrayList<Object>) pIds;   
-}
+
+    @Override
+    public ArrayList<Object> projectsIds(int porId) {
+        List<Object> pIds = new ArrayList<>();
+
+        Query m = sc.createQuery("select por from Porposa por left join fetch por.projectsforusers where porpId=?)");
+        m.setInteger(0, porId);
+        pIds = m.list();
+        return (ArrayList<Object>) pIds;
+    }
 }

@@ -58,10 +58,12 @@ public class Users implements java.io.Serializable {
     @Expose
     private Set<Phoneofuser> phoneofusers = new HashSet<Phoneofuser>(0);
     private Set<SocialAccounts> socialAccountses = new HashSet<SocialAccounts>(0);
+    @Expose
     private Set<Portofolioforuser> portofolioforusers = new HashSet<Portofolioforuser>(0);
     private Set<Projectsforusers> projectsforuserses = new HashSet<Projectsforusers>(0);
     private Set<Porposa> porposas = new HashSet<Porposa>(0);
     private Set<Postforprojects> postforprojectses = new HashSet<Postforprojects>(0);
+    @Expose
     private Set<Skilltable> skilltables = new HashSet<Skilltable>(0);
 
     public Users() {

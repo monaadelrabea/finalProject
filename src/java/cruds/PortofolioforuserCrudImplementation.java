@@ -23,11 +23,15 @@ import seesioncreator.SessionCreation;
  */
 public class PortofolioforuserCrudImplementation implements PortofolioforuserCrudInterface {
 
+    Session sc;
+
+    public PortofolioforuserCrudImplementation() {
+        sc = SessionCreation.getSessionFactory().openSession();
+    }
+
     @Override
     public boolean insert(Portofolioforuser portofolioforuser) {
-boolean flag=true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
-
+        boolean flag = true;
         try {
             sc.beginTransaction();
             sc.saveOrUpdate(portofolioforuser);
@@ -35,17 +39,15 @@ boolean flag=true;
         } catch (HibernateException e) {
             sc.getTransaction().rollback();
             e.printStackTrace();
-            flag=false;
+            flag = false;
         } finally {
             sc.close();
         }
-return flag;
+        return flag;
     }
 
     @Override
     public Portofolioforuser select(int id) {
-
-        Session sc = SessionCreation.getSessionFactory().openSession();
         Portofolioforuser portofolioforuser = new Portofolioforuser();
 
         try {
@@ -64,9 +66,7 @@ return flag;
 
     @Override
     public boolean update(int id, Portofolioforuser portofolioforuser) {
-boolean flag=true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
-
+        boolean flag = true;
         try {
             sc.beginTransaction();
             Portofolioforuser protofolioforuser = (Portofolioforuser) sc.get(Portofolioforuser.class, id);
@@ -75,18 +75,16 @@ boolean flag=true;
             sc.getTransaction().commit();
         } catch (HibernateException e) {
             e.printStackTrace();
-            flag=false;
+            flag = false;
         } finally {
             sc.close();
         }
-return flag;
+        return flag;
     }
 
     @Override
     public boolean delete(int id) {
-boolean flag=true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
-
+        boolean flag = true;
         try {
             sc.beginTransaction();
             Portofolioforuser portofolioforuser = (Portofolioforuser) sc.get(Portofolioforuser.class, id);
@@ -94,23 +92,22 @@ boolean flag=true;
             sc.getTransaction().commit();
         } catch (HibernateException e) {
             e.printStackTrace();
-            flag=false;
+            flag = false;
         } finally {
             sc.close();
         }
-return flag;
-    }  
-     @Override
-    public ArrayList<Portofolioforuser> selectPortofolios(Category cat) {
-        List <Portofolioforuser> portofolios = new ArrayList<>();
- Session sc = SessionCreation.getSessionFactory().openSession();
+        return flag;
+    }
 
+    @Override
+    public ArrayList<Portofolioforuser> selectPortofolios(Category cat) {
+        List<Portofolioforuser> portofolios = new ArrayList<>();
         try {
             sc.beginTransaction();
             Criteria cr = sc.createCriteria(Portofolioforuser.class);
-          cr.add(Restrictions.eq("category.categoryId", cat.getCategoryId()));
-          cr.add(Restrictions.sqlRestriction("4=4 order by rand()"));
-          portofolios = cr.list();
+            cr.add(Restrictions.eq("category.categoryId", cat.getCategoryId()));
+            cr.add(Restrictions.sqlRestriction("1=1 order by rand()"));
+            portofolios = cr.list();
             sc.getTransaction().commit();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -118,18 +115,18 @@ return flag;
             sc.close();
         }
 
-        return (ArrayList<Portofolioforuser>) portofolios;    }
-    
-    public Users selectUser(int pId){
-         Session sc = SessionCreation.getSessionFactory().openSession();
-          Users u =new Users();
-          Portofolioforuser portofolioforuser = new Portofolioforuser();
-           System.out.println(pId);
-          try {
-             
+        return (ArrayList<Portofolioforuser>) portofolios;
+    }
+
+    public Users selectUser(int pId) {
+        Users u = new Users();
+        Portofolioforuser portofolioforuser = new Portofolioforuser();
+        System.out.println(pId);
+        try {
+
             sc.beginTransaction();
             portofolioforuser = (Portofolioforuser) sc.get(Portofolioforuser.class, pId);
-            u=portofolioforuser.getUsers();
+            u = portofolioforuser.getUsers();
             System.out.println(u.getUserId());
             sc.getTransaction().commit();
         } catch (HibernateException e) {
@@ -137,7 +134,7 @@ return flag;
         } finally {
             sc.close();
         }
-        
+
         return u;
     }
 

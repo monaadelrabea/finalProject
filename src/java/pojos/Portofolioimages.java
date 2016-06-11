@@ -20,7 +20,7 @@ import javax.persistence.Table;
 )
 public class Portofolioimages implements java.io.Serializable {
 
-    @Expose
+   @Expose
     private Integer imageId;
     private Portofolioforuser portofolioforuser;
     @Expose

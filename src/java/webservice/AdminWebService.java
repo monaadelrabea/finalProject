@@ -5,12 +5,12 @@
  */
 package webservice;
 
-import businesslayer.businesslogic.AdminDelegation;
-import businesslayer.businesslogic.ProjectDelegation;
-import businesslayer.businesslogic.UsersDelegation;
-import businesslayer.businesslogicinterface.AdminDelegationInt;
-import businesslayer.businesslogicinterface.ProjectDelegationInt;
-import businesslayer.businesslogicinterface.UsersDelegationInt;
+import businesslogic.AdminDelegation;
+import businesslogic.ProjectDelegation;
+import businesslogic.UsersDelegation;
+import businesslogicinterface.AdminDelegationInt;
+import businesslogicinterface.ProjectDelegationInt;
+import businesslogicinterface.UsersDelegationInt;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
@@ -76,4 +76,6 @@ public class AdminWebService {
      System.out.println(out);
         return Response.status(200).entity(g.toJson(map)).build();
     }
+    
+    
 }

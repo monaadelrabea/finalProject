@@ -5,10 +5,10 @@
  */
 package webservice;
 
-import businesslayer.businesslogic.PorposaDelegation;
-import businesslayer.businesslogic.UsersDelegation;
-import businesslayer.businesslogicinterface.PorposaDelegationInt;
-import businesslayer.businesslogicinterface.UsersDelegationInt;
+import businesslogic.PorposaDelegation;
+import businesslogic.UsersDelegation;
+import businesslogicinterface.PorposaDelegationInt;
+import businesslogicinterface.UsersDelegationInt;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
@@ -22,6 +22,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONObject;
 import pojos.Porposa;
+import pojos.Users;
 
 /**
  *
@@ -51,8 +52,8 @@ public class PorposerWebService {
     }
     
      @GET
-    @Path("/getProjectById")
-    public Response projectById(@QueryParam("projectId") int projectId) throws Exception {
+    @Path("/getPorposals")
+    public Response projectById(@QueryParam("pId") int projectId) throws Exception {
         PorposaDelegationInt porposaDelegationInt = new PorposaDelegation();
         ArrayList<Porposa> porposa = porposaDelegationInt.delegateSelectPorposaHQL(projectId);
         Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().serializeNulls().create();
@@ -61,6 +62,21 @@ public class PorposerWebService {
         map.put("projectPorposa", porposa);
         return Response.status(200).entity(g.toJson(map)).build();
     }
-
+ @GET
+    @Path("/getUser")
+    public Response users(@QueryParam("porId") int projectId) throws Exception {
+        PorposaDelegationInt porposaDelegationInt = new PorposaDelegation();
+        Users u = (Users) porposaDelegationInt.user(projectId);
+        Gson g = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().serializeNulls().create();
+        Map<String, Object> map = new HashMap();
+        if(u!=null){
+        map.put("satatus", true);
+        map.put("projectPorposa", u);
+        }else{
+            map.put("satatus", false); 
+        }
+        return Response.status(200).entity(g.toJson(map)).build();
+    }
+    
    
 }

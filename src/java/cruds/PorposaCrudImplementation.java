@@ -25,10 +25,15 @@ import seesioncreator.SessionCreation;
  */
 public class PorposaCrudImplementation implements PorposaCrudInterface {
 
+    Session sc;
+
+    public PorposaCrudImplementation() {
+        sc = SessionCreation.getSessionFactory().openSession();
+    }
+
     @Override
-    public boolean  insert(Porposa porposa) {
-boolean flag=true;
-        Session sc =SessionCreation.getSessionFactory().openSession();
+    public boolean insert(Porposa porposa) {
+        boolean flag = true;
 
         try {
             sc.beginTransaction();
@@ -37,16 +42,16 @@ boolean flag=true;
         } catch (HibernateException e) {
             sc.getTransaction().rollback();
             e.printStackTrace();
-            flag=false;
+            flag = false;
         } finally {
             sc.close();
         }
-return flag;
+        return flag;
     }
-@Override
+
+    @Override
     public ArrayList<Porposa> selectPorposeHQL(int id) {
 
-        Session sc = SessionCreation.getSessionFactory().openSession();
         ArrayList<Porposa> porposas = new ArrayList<>();
 
         try {
@@ -64,10 +69,10 @@ return flag;
         return porposas;
 
     }
+
     @Override
     public Porposa select(Integer id) {
 
-        Session sc = SessionCreation.getSessionFactory().openSession();
         Porposa porposa = new Porposa();
 
         try {
@@ -86,8 +91,7 @@ return flag;
 
     @Override
     public boolean update(Integer id, Porposa porposa) {
-boolean flag=true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
+        boolean flag = true;
 
         try {
             sc.beginTransaction();
@@ -97,18 +101,16 @@ boolean flag=true;
             sc.getTransaction().commit();
         } catch (HibernateException e) {
             e.printStackTrace();
-            flag=false;
+            flag = false;
         } finally {
             sc.close();
         }
-return flag;
+        return flag;
     }
 
     @Override
     public boolean delete(Integer id) {
-boolean flag=true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
-
+        boolean flag = true;
         try {
             sc.beginTransaction();
             Porposa porposa = (Porposa) sc.get(Porposa.class, id);
@@ -116,21 +118,27 @@ boolean flag=true;
             sc.getTransaction().commit();
         } catch (HibernateException e) {
             e.printStackTrace();
-            flag=false;
+            flag = false;
         } finally {
             sc.close();
         }
-return flag;
+        return flag;
     }
 
+    @Override
+    public ArrayList<Object> projectsIds(int porId) {
+        List<Object> pIds = new ArrayList<>();
+        Query m = sc.createQuery("select por from Porposa por left join fetch por.projectsforusers where porpId=?)");
+        m.setInteger(0, porId);
+        pIds = m.list();
+        return (ArrayList<Object>) pIds;
+    }
  @Override
-      public ArrayList<Object> projectsIds(int porId){
-    List<Object> pIds=new ArrayList<>();
-   Session sc = SessionCreation.getSessionFactory().openSession();
-      Query m=sc.createQuery("select por from Porposa por left join fetch por.projectsforusers where porpId=?)");
-       m.setInteger(0, porId);
-       pIds = m.list();
-        return (ArrayList<Object>) pIds;   
-}
-
+   public Object user(int porId) {
+        List<Object> pIds = new ArrayList<>();
+        Query m = sc.createQuery("select por from Porposa por left join fetch por.users where porpId=?)");
+        m.setInteger(0, porId);
+        pIds = m.list();
+        return (ArrayList<Object>) pIds.get(0);
+    }
 }

@@ -23,6 +23,12 @@ import seesioncreator.SessionCreation;
  */
 public class UsersCrudImplementation implements UsersCrudInterface {
 
+    Session sc;
+
+    public UsersCrudImplementation() {
+        sc = SessionCreation.getSessionFactory().openSession();
+    }
+
     @Override
     public boolean insert(Users u) {
         boolean flag = true;
@@ -42,12 +48,11 @@ public class UsersCrudImplementation implements UsersCrudInterface {
         return flag;
     }
 
- 
     @Override
     public Users selectEP(String email, String password) {
         Session sc = SessionCreation.getSessionFactory().openSession();
 
-        List<Users> users =new ArrayList();
+        List<Users> users = new ArrayList();
         try {
             sc.beginTransaction();
             Criteria cr = sc.createCriteria(Users.class);
@@ -60,10 +65,10 @@ public class UsersCrudImplementation implements UsersCrudInterface {
         } finally {
             sc.close();
         }
-        return ( (Users)users.get(0));
+        return ((Users) users.get(0));
     }
-    
-      @Override
+
+    @Override
     public Object selectUserHQL(int id) {
 
         Session sc = SessionCreation.getSessionFactory().openSession();
@@ -73,11 +78,12 @@ public class UsersCrudImplementation implements UsersCrudInterface {
         return users;
 
     }
-   @Override
-    public ArrayList<Users>  selectE(String email) {
+
+    @Override
+    public ArrayList<Users> selectE(String email) {
         Session sc = SessionCreation.getSessionFactory().openSession();
 
-        List <Users>users =new ArrayList();
+        List<Users> users = new ArrayList();
         try {
             sc.beginTransaction();
             Criteria cr = sc.createCriteria(Users.class);
@@ -91,6 +97,7 @@ public class UsersCrudImplementation implements UsersCrudInterface {
         }
         return (ArrayList<Users>) users;
     }
+
     @Override
     public Users select(int id) {
 
@@ -112,14 +119,21 @@ public class UsersCrudImplementation implements UsersCrudInterface {
     }
 
     @Override
-    public boolean update(int id, Users u) {
+    public boolean update(Users u) {
         boolean flag = true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
-
         try {
             sc.beginTransaction();
-            Users users = (Users) sc.get(Users.class, id);
+            Users users = (Users) sc.get(Users.class, u.getUserId());
+            users.setUserEmail(u.getUserEmail());
+            users.setUserImageUrl(u.getUserImageUrl());
+            users.setGender(u.isGender());
+            users.setUserName(u.getUserName());
+            users.setGovernorate(u.getGovernorate());
             users.setCity(u.getCity());
+            users.setSummery(u.getSummery());
+            u.setProfessinalTiltle(u.getProfessinalTiltle());
+            u.setIdentefire(u.getIdentefire());
+            users.setPhoneofusers(u.getPhoneofusers());
             sc.update(users);
             sc.getTransaction().commit();
         } catch (HibernateException e) {
@@ -134,7 +148,6 @@ public class UsersCrudImplementation implements UsersCrudInterface {
     @Override
     public boolean delete(int id) {
         boolean flag = true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
 
         try {
             sc.beginTransaction();
@@ -152,49 +165,52 @@ public class UsersCrudImplementation implements UsersCrudInterface {
 
     @Override
     public ArrayList<Users> selectMaxRateUsers() {
-        ArrayList<Integer> maxRate=maxValue();
-          List<Users> maxRateOfUsers=new ArrayList<>();
-         Session session = SessionCreation.getSessionFactory().openSession();
-Criteria criteria = session.createCriteria(Users.class);
-System.out.println(maxRate.get(0));
-    //criteria.add(Restrictions.eq("rate", maxRate.get(0)));
-             criteria.add(Restrictions.in("rate", maxRate));
-                criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
-                criteria.setMaxResults(6);
-             System.out.println(maxRate.get(1));
-     maxRateOfUsers=criteria.list();
-    return (ArrayList<Users>) maxRateOfUsers;
+        ArrayList<Integer> maxRate = maxValue();
+        List<Users> maxRateOfUsers = new ArrayList<>();
+        Criteria criteria = sc.createCriteria(Users.class);
+        System.out.println(maxRate.get(0));
+        criteria.add(Restrictions.in("rate", maxRate));
+        criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
+        criteria.setMaxResults(3);
+        System.out.println(maxRate.get(1));
+        maxRateOfUsers = criteria.list();
+        return (ArrayList<Users>) maxRateOfUsers;
     }
-     @Override 
-public ArrayList<Users> selectAllUsers() {
-        ArrayList<Users> maxRate= new ArrayList<>();
-         Session session = SessionCreation.getSessionFactory().openSession();
-Criteria criteria = session.createCriteria(Users.class);
-    maxRate=(ArrayList<Users>) criteria.list();
-    return maxRate;
+
+    @Override
+    public ArrayList<Users> selectAllUsers() {
+        ArrayList<Users> maxRate = new ArrayList<>();
+        
+        Criteria criteria = sc.createCriteria(Users.class);
+        maxRate = (ArrayList<Users>) criteria.list();
+        return maxRate;
     }
-public ArrayList<Integer> maxValue() {
-      ArrayList<Users> usersAll= selectAllUsers() ;
-         ArrayList<Integer> users= new ArrayList<>() ;
-        int rate1=0;
-        int rate2=0;
-        int max=usersAll.get(0).getRate();
-          int max2=usersAll.get(0).getRate();
-        for(int i=0;i<usersAll.size();i++){
-         if(usersAll.get(i).getRate()>max) {
-           max=usersAll.get(i).getRate();
-           users.add(usersAll.get(i).getRate());
-           rate1=usersAll.get(i).getRate();
-         }
-          if(usersAll.get(i).getRate()> max2 && usersAll.get(i).getRate()< rate1) {
-            max2=usersAll.get(i).getRate();
-           users.add(usersAll.get(i).getRate());
-           rate2=usersAll.get(i).getRate();
-         }
+
+    public ArrayList<Integer> maxValue() {
+        ArrayList<Users> usersAll = selectAllUsers();
+        ArrayList<Integer> users = new ArrayList<>();
+        int rate1 = 0;
+        int rate2 = 0;
+        int max = Integer.MIN_VALUE;
+        int max2 = Integer.MIN_VALUE;
+        System.out.println(max);
+        for (int i = 0; i < usersAll.size(); i++) {
+            if (usersAll.get(i).getRate() > max) {
+                max = usersAll.get(i).getRate();
+                users.add(usersAll.get(i).getRate());
+                rate1 = usersAll.get(i).getRate();
+                 System.out.println(rate1);
+            }
+            if (usersAll.get(i).getRate() > max2 && usersAll.get(i).getRate() < rate1) {
+                max2 = usersAll.get(i).getRate();
+                users.add(usersAll.get(i).getRate());
+                rate2 = usersAll.get(i).getRate();
+                 System.out.println(rate2);
+            }
         }
-      System.out.println(rate1);
-         System.out.println(rate2);
-    return users;
+        System.out.println(rate1);
+        System.out.println(rate2);
+        return users;
     }
 
 }

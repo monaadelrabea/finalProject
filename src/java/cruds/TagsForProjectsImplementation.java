@@ -17,7 +17,10 @@ import seesioncreator.SessionCreation;
  * @author m@pc
  */
 public class TagsForProjectsImplementation implements TagsForProjectsInterface {
-
+Session sc;
+    public TagsForProjectsImplementation (){
+         sc = SessionCreation.getSessionFactory().openSession();
+    }
     @Override
     public ArrayList<Tagsofprojects> selectTagsOfProjects() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -31,17 +34,17 @@ public class TagsForProjectsImplementation implements TagsForProjectsInterface {
     @Override
     public boolean insertTagsOfProjects(Tagsofprojects tg) {
         boolean flag = true;
-        Session se = SessionCreation.getSessionFactory().openSession();
+    
         try {
-            se.getTransaction().begin();
-            se.saveOrUpdate(tg);
-            se.getTransaction().commit();
+            sc.getTransaction().begin();
+            sc.saveOrUpdate(tg);
+            sc.getTransaction().commit();
         } catch (HibernateException ex) {
-            se.getTransaction().rollback();
+            sc.getTransaction().rollback();
             ex.printStackTrace();
             flag = false;
         } finally {
-            se.close();
+            sc.close();
         }
         return flag;
     }

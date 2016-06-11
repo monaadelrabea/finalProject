@@ -7,6 +7,7 @@ package seesioncreator;
 
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
@@ -16,7 +17,8 @@ import org.hibernate.SessionFactory;
  */
 public class SessionCreation {
 
-    private static final SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
+     public static SessionFactory factory;
     
     static {
         try {
@@ -30,7 +32,12 @@ public class SessionCreation {
         }
     }
     
-    public static SessionFactory getSessionFactory() {
+    public static  synchronized SessionFactory getSessionFactory() {
+        if (sessionFactory == null) {
+            sessionFactory = new Configuration().configure("hibernate.cfg.xml").
+                    buildSessionFactory();
+        }
         return sessionFactory;
     }
+    
 }

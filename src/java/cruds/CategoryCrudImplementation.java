@@ -21,17 +21,20 @@ import seesioncreator.SessionCreation;
  *
  * @author m@pc
  */
-public class CategoryCrudImplementation implements CategoryCrudInterface{
-
+public class CategoryCrudImplementation implements CategoryCrudInterface {
+ Session sc;
+    public CategoryCrudImplementation  (){
+         sc = SessionCreation.getSessionFactory().openSession();
+    }
     @Override
     public ArrayList<Category> selectCategorys() {
-        List <Category> categories = new ArrayList<>();
- Session sc = SessionCreation.getSessionFactory().openSession();
+        List<Category> categories = new ArrayList<>();
+       
 
         try {
             sc.beginTransaction();
             Criteria cr = sc.createCriteria(Category.class);
-           categories = cr.list();
+            categories = cr.list();
             sc.getTransaction().commit();
         } catch (HibernateException e) {
             e.printStackTrace();
@@ -39,30 +42,32 @@ public class CategoryCrudImplementation implements CategoryCrudInterface{
             sc.close();
         }
 
-        return (ArrayList<Category>) categories;    }
+        return (ArrayList<Category>) categories;
+    }
 
     @Override
     public Category selectCategory(int id) {
-       Session se = SessionCreation.getSessionFactory().openSession();  
-       se.getTransaction().begin();
-       Category cat =(Category) se.get(Category.class, id);
-       se.close();
-        return cat;    
+        //Session se = SessionCreation.getSessionFactory().openSession();
+        sc.getTransaction().begin();
+        Category cat = (Category) sc.get(Category.class, id);
+        sc.close();
+        return cat;
     }
+
     @Override
     public boolean insertCategoty(Category c) {
-        boolean flag =true;
-        Session se = SessionCreation.getSessionFactory().openSession();
-        try{
-       se.getTransaction().begin();
-       se.save(c);
-       se.getTransaction().commit();
-        }catch(HibernateException ex){
-            se.getTransaction().rollback();
-            flag=false;
+        boolean flag = true;
+       
+        try {
+            sc.getTransaction().begin();
+            sc.save(c);
+            sc.getTransaction().commit();
+        } catch (HibernateException ex) {
+            sc.getTransaction().rollback();
+            flag = false;
             ex.printStackTrace();
-        }finally{
-            se.close();
+        } finally {
+            sc.close();
         }
         return flag;
     }
@@ -76,5 +81,5 @@ public class CategoryCrudImplementation implements CategoryCrudInterface{
     public boolean deleteCategory(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

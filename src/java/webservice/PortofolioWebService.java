@@ -5,15 +5,14 @@
  */
 package webservice;
 
-import businesslayer.businesslogic.CategoryDelegation;
-import businesslayer.businesslogic.PortofolioforuserDelegation;
-import businesslayer.businesslogic.UsersDelegation;
-import businesslayer.businesslogicinterface.CategoryDelegationInt;
-import businesslayer.businesslogicinterface.PortofolioforuserDelegationInt;
-import businesslayer.businesslogicinterface.UsersDelegationInt;
+import businesslogic.CategoryDelegation;
+import businesslogic.PortofolioforuserDelegation;
+import businesslogic.UsersDelegation;
+import businesslogicinterface.CategoryDelegationInt;
+import businesslogicinterface.PortofolioforuserDelegationInt;
+import businesslogicinterface.UsersDelegationInt;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -36,8 +35,8 @@ import pojos.Users;
 public class PortofolioWebService {
 
     public static ArrayList<Portofolioforuser> PortofoliosForUser = new ArrayList<>();
-    //public static int checkDate = new Date().getDay();
-     public static int checkDate = 3;
+   // public static int checkDate = new Date().getDay();
+     public static int checkDate =2;
     PortofolioforuserDelegationInt por = new PortofolioforuserDelegation();
     UsersDelegationInt o = new UsersDelegation();
     CategoryDelegationInt cat = new CategoryDelegation();

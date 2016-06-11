@@ -30,9 +30,13 @@ public class Porposa implements java.io.Serializable {
     private Integer porpId;
     @Expose
     private Projectsforusers projectsforusers;
+    @Expose
     private Users users;
+    @Expose
     private int price;
+    @Expose
     private Date startDatePor;
+    @Expose
     private Date deadLinePor;
     @Expose
     private String statusOfPorposa;

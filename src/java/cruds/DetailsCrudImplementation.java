@@ -14,7 +14,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import pojos.Details;
 import pojos.DetailsId;
-import pojos.Users;
 import seesioncreator.SessionCreation;
 
 /**
@@ -23,18 +22,19 @@ import seesioncreator.SessionCreation;
  */
 public class DetailsCrudImplementation implements DetailsCrudInterface {
 
+    Session sc;
+
+    public DetailsCrudImplementation() {
+        sc = SessionCreation.getSessionFactory().openSession();
+    }
+
     @Override
     public ArrayList<Details> selectDetails(int pId, int PrId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
-
     @Override
     public Details selectDetails(DetailsId id) {
-
-        Session sc = SessionCreation.getSessionFactory().openSession();
-
         List details = new ArrayList();
         try {
             sc.beginTransaction();
@@ -54,18 +54,17 @@ public class DetailsCrudImplementation implements DetailsCrudInterface {
     @Override
     public boolean insertDetails(Details d) {
         boolean flag = true;
-        Session se = SessionCreation.getSessionFactory().openSession();
         try {
             System.out.println("hassan1");
-            se.getTransaction().begin();
-            se.saveOrUpdate(d);
-            se.getTransaction().commit();
+            sc.getTransaction().begin();
+            sc.saveOrUpdate(d);
+            sc.getTransaction().commit();
         } catch (HibernateException ex) {
-            se.getTransaction().rollback();
+            sc.getTransaction().rollback();
             ex.printStackTrace();
             flag = false;
         } finally {
-            se.close();
+            sc.close();
         }
         return flag;
     }

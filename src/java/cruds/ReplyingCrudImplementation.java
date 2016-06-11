@@ -17,11 +17,15 @@ import seesioncreator.SessionCreation;
  */
 public class ReplyingCrudImplementation implements ReplyingCrudInterface {
 
+    Session sc;
+
+    public ReplyingCrudImplementation() {
+        sc = SessionCreation.getSessionFactory().openSession();
+    }
+
     @Override
     public boolean insert(Comments replying) {
-boolean flag =true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
-
+        boolean flag = true;
         try {
             sc.beginTransaction();
             sc.saveOrUpdate(replying);
@@ -29,18 +33,16 @@ boolean flag =true;
         } catch (HibernateException e) {
             sc.getTransaction().rollback();
             e.printStackTrace();
-            flag=false;
+            flag = false;
         } finally {
             sc.close();
         }
-return flag;
+        return flag;
     }
 
     @Override
     public Comments select(Integer id) {
-
-        Session sc = SessionCreation.getSessionFactory().openSession();
-       Comments replying = new Comments();
+        Comments replying = new Comments();
 
         try {
             sc.beginTransaction();
@@ -57,10 +59,8 @@ return flag;
     }
 
     @Override
-    public boolean  update(Integer id, Comments replying) {
-boolean flag =true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
-
+    public boolean update(Integer id, Comments replying) {
+        boolean flag = true;
         try {
             sc.beginTransaction();
             Comments replying1 = (Comments) sc.get(Comments.class, id);
@@ -69,30 +69,29 @@ boolean flag =true;
             sc.getTransaction().commit();
         } catch (HibernateException e) {
             e.printStackTrace();
-            flag=false;
+            flag = false;
         } finally {
             sc.close();
         }
-return flag;
+        return flag;
     }
 
     @Override
-    public boolean  delete(Integer id) {
-    boolean flag=true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
+    public boolean delete(Integer id) {
+        boolean flag = true;
 
         try {
             sc.beginTransaction();
-          Comments replying = (Comments) sc.get(Comments.class, id);
+            Comments replying = (Comments) sc.get(Comments.class, id);
             sc.delete(replying);
             sc.getTransaction().commit();
         } catch (HibernateException e) {
             e.printStackTrace();
-            flag=false;
+            flag = false;
         } finally {
             sc.close();
         }
-return flag;
+        return flag;
     }
 
 }

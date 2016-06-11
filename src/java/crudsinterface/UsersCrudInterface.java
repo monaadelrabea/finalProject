@@ -20,7 +20,7 @@ public interface UsersCrudInterface {
     
     public Users selectEP(String email, String password);
     
-    public boolean update(int id, Users u);
+    public boolean update( Users u) ;
 
     public boolean delete(int id);
     
@@ -31,5 +31,6 @@ public interface UsersCrudInterface {
     public ArrayList<Users> selectE(String email);
     
     public Object selectUserHQL(int id);
+     
 
 }

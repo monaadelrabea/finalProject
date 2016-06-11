@@ -21,7 +21,10 @@ import seesioncreator.SessionCreation;
  * @author m@pc
  */
 public class TagCrudImplementation implements TagCrudInterface {
-
+Session sc;
+    public TagCrudImplementation  (){
+         sc = SessionCreation.getSessionFactory().openSession();
+    }
     @Override
     public ArrayList<Tags> selectTags() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -35,17 +38,17 @@ public class TagCrudImplementation implements TagCrudInterface {
     @Override
     public boolean insertTag(Tags t) {
         boolean flag = true;
-        Session se = SessionCreation.getSessionFactory().openSession();
+        
         try {
-            se.getTransaction().begin();
-            se.saveOrUpdate(t);
-            se.getTransaction().commit();
+            sc.getTransaction().begin();
+            sc.saveOrUpdate(t);
+            sc.getTransaction().commit();
         } catch (HibernateException ex) {
-            se.getTransaction().rollback();
+            sc.getTransaction().rollback();
             ex.printStackTrace();
             flag = false;
         } finally {
-            se.close();
+            sc.close();
         }
         return flag;
     }
@@ -64,9 +67,6 @@ public class TagCrudImplementation implements TagCrudInterface {
     public Tags selectTag(String name) {
 
         Tags t = null;
-
-        Session sc = SessionCreation.getSessionFactory().openSession();
-
         try {
             sc.beginTransaction();
             Criteria cr = sc.createCriteria(Users.class);

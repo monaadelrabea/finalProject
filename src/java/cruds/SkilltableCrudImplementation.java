@@ -19,11 +19,14 @@ import seesioncreator.SessionCreation;
  * @author hassan
  */
 public class SkilltableCrudImplementation implements SkilltableCrudInterface {
-
+Session sc;
+    public SkilltableCrudImplementation (){
+         sc = SessionCreation.getSessionFactory().openSession();
+    }
     @Override
     public boolean insert(Skilltable s) {
 boolean flag=true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
+   
 
         try {
             sc.beginTransaction();
@@ -42,7 +45,6 @@ return flag;
     @Override
     public Skilltable select(int id) {
 
-        Session sc = SessionCreation.getSessionFactory().openSession();
         Skilltable skilltable = new Skilltable();
 
         try {
@@ -62,7 +64,7 @@ return flag;
     @Override
     public boolean update(Integer id, Skilltable s) {
        boolean flag=true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
+       
 
         try {
             sc.beginTransaction();
@@ -82,7 +84,7 @@ return flag;
     @Override
     public boolean delete(Integer id) {
 boolean flag=true;
-        Session sc = SessionCreation.getSessionFactory().openSession();
+     
 
         try {
             sc.beginTransaction();
@@ -100,8 +102,6 @@ return flag;
   @Override
     public ArrayList<Skilltable> selectSkills() {
         List <Skilltable> skills = new ArrayList<>();
- Session sc = SessionCreation.getSessionFactory().openSession();
-
         try {
             sc.beginTransaction();
             Criteria cr = sc.createCriteria(Skilltable.class);

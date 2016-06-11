@@ -5,12 +5,12 @@
  */
 package webservice;
 
-import businesslayer.businesslogic.DetailsDelegation;
-import businesslayer.businesslogic.PorposaDelegation;
-import businesslayer.businesslogic.ProjectDelegation;
-import businesslayer.businesslogicinterface.DetailsDelegationInt;
-import businesslayer.businesslogicinterface.PorposaDelegationInt;
-import businesslayer.businesslogicinterface.ProjectDelegationInt;
+import businesslogic.DetailsDelegation;
+import businesslogic.PorposaDelegation;
+import businesslogic.ProjectDelegation;
+import businesslogicinterface.DetailsDelegationInt;
+import businesslogicinterface.PorposaDelegationInt;
+import businesslogicinterface.ProjectDelegationInt;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.util.HashMap;

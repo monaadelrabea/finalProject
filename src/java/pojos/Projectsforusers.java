@@ -47,6 +47,7 @@ public class Projectsforusers implements java.io.Serializable {
     private Set<Projectsimages> projectsimageses = new HashSet<Projectsimages>(0);
     @Expose
     private Set<Postforprojects> postforprojectses = new HashSet<Postforprojects>(0);
+    @Expose
     private Set<Skilltable> skilltables = new HashSet<Skilltable>(0);
     @Expose
     private Set<Details> detailses = new HashSet<Details>(0);

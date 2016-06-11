@@ -24,12 +24,14 @@ import seesioncreator.SessionCreation;
  * @author m@pc
  */
 public class ProjectCrudImplementation implements ProjectCrudInterface {
-
+Session sc;
+    public ProjectCrudImplementation  (){
+         sc = SessionCreation.getSessionFactory().openSession();
+    }
     @Override
     public ArrayList<Projectsforusers> selectProjects(int id) {
-         List <Projectsforusers> projects = new ArrayList<>();
-        Session session = SessionCreation.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Projectsforusers.class);
+         List <Projectsforusers> projects = new ArrayList<>(); 
+        Criteria criteria = sc.createCriteria(Projectsforusers.class);
         criteria.add(Restrictions.eq("users.userId", id));
          criteria.add(Restrictions.sqlRestriction("1=1 order by rand()"));
         projects = criteria.list();
@@ -38,16 +40,17 @@ public class ProjectCrudImplementation implements ProjectCrudInterface {
 
     @Override
     public Projectsforusers selectProject(int id) {
-        Session se = SessionCreation.getSessionFactory().openSession();
         Projectsforusers p =new Projectsforusers();
          try {
-            se.beginTransaction();
-            p = (Projectsforusers) se.get(Projectsforusers.class, id);
-            se.getTransaction().commit();
+            sc.beginTransaction();
+            System.out.println();
+            p = (Projectsforusers) sc.get(Projectsforusers.class, id);
+            sc.getTransaction().commit();
+              System.out.println(p);
         } catch (HibernateException e) {
             e.printStackTrace();
         } finally {
-            se.close();
+            sc.close();
         }
    
         return p; //To change body of generated methods, choose Tools | Templates.
@@ -56,17 +59,16 @@ public class ProjectCrudImplementation implements ProjectCrudInterface {
     @Override
     public boolean insertProject(Projectsforusers c) {
         boolean flag = true;
-        Session se = SessionCreation.getSessionFactory().openSession();
         try {
-            se.getTransaction().begin();
-            se.saveOrUpdate(c);
-            se.getTransaction().commit();
+            sc.getTransaction().begin();
+            sc.saveOrUpdate(c);
+            sc.getTransaction().commit();
         } catch (HibernateException ex) {
-            se.getTransaction().rollback();
+            sc.getTransaction().rollback();
             ex.printStackTrace();
             flag = false;
         } finally {
-            se.close();
+            sc.close();
         }
         return flag;
     }
@@ -104,9 +106,8 @@ public class ProjectCrudImplementation implements ProjectCrudInterface {
          UsersCrudInterface crud = new UsersCrudImplementation();
          ArrayList<Users> usersAll= crud.selectMaxRateUsers();
           List <Projectsforusers> projects = new ArrayList<>();
-           Session session = SessionCreation.getSessionFactory().openSession();
        for(int i=0;i<usersAll.size();i++){
-         Criteria criteria = session.createCriteria(Projectsforusers.class);
+         Criteria criteria = sc.createCriteria(Projectsforusers.class);
         criteria.add(Restrictions.eq("users.userId", usersAll.get(i).getUserId()));
         projects.addAll(criteria.list()) ;    
     }
@@ -116,9 +117,8 @@ public class ProjectCrudImplementation implements ProjectCrudInterface {
     
   @Override
     public ArrayList<Projectsforusers> selectAllProjects() {
-        Session session = SessionCreation.getSessionFactory().openSession();
          List<Projectsforusers>  projects=new ArrayList<>();
-         Criteria criteria = session.createCriteria(Projectsforusers.class);
+         Criteria criteria = sc.createCriteria(Projectsforusers.class);
         projects=criteria.list() ;    
    
      return  (ArrayList<Projectsforusers>) projects;  

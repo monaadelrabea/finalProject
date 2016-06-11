@@ -13,19 +13,23 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import pojos.Admin;
-import pojos.Users;
 import seesioncreator.SessionCreation;
 
 /**
  *
  * @author m@pc
  */
-public class AdminCrud implements AdminInterface{
+public class AdminCrud implements AdminInterface {
+    
+    Session sc;
+    public AdminCrud (){
+         sc = SessionCreation.getSessionFactory().openSession();
+    }
 
     @Override
     public Admin selectEP(String email, String password) {
-        Session sc = SessionCreation.getSessionFactory().openSession();
-        List admin =new ArrayList();
+       
+        List admin = new ArrayList();
         try {
             sc.beginTransaction();
             Criteria cr = sc.createCriteria(Admin.class);
@@ -40,7 +44,5 @@ public class AdminCrud implements AdminInterface{
         }
         return ((Admin) admin.get(0));
     }
-    
-    }
-    
 
+}
